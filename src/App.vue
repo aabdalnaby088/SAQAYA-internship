@@ -1,26 +1,23 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
-import Navbar from './components/Navbar.vue';
+import { RouterView } from 'vue-router';
+import MainLayout from './Layouts/MainLayout.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    RouterLink,
     RouterView,
-    Navbar
-  },
-  data() {
-    return {
-      msg: 'Hello Vue 3 + TypeScript + Vite',
-    };
+    MainLayout
   },
 });
 </script>
 
 
 <template>
-  <Navbar />
-  <RouterView />
+  <MainLayout>
+    <RouterView />
+  </MainLayout>
 </template>
+
+
 
