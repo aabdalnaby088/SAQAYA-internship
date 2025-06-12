@@ -1,21 +1,3 @@
-<template>
-    <header>
-        <div class="wrapper">
-            <h3>Hello vue 🥰</h3>
-
-            <nav :class="{ 'open': isMenuOpen }">
-                <RouterLink to="/" @click="closeMenu">Home</RouterLink>
-                <RouterLink to="/products" @click="closeMenu">Products</RouterLink>
-            </nav>
-            <button class="hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
-</template>
-
 <script>
 export default {
     data() {
@@ -34,10 +16,37 @@ export default {
 }
 </script>
 
+<template>
+    <header>
+        <div class="wrapper">
+            <h3>Hello vue 🥰</h3>
+
+            <nav :class="{ 'open': isMenuOpen }">
+                <RouterLink to="/" @click="closeMenu">Home</RouterLink>
+                <RouterLink to="/products" @click="closeMenu">Products</RouterLink>
+                <RouterLink to="/contact-us" @click="closeMenu">Contact Us</RouterLink>
+            </nav>
+            <button class="hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+</template>
+
+
+
 <style scoped>
+
 header {
-    line-height: 1.5;
-    max-height: 100vh;
+    position: fixed;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center ;
 }
 
 h3{
@@ -51,6 +60,7 @@ header .wrapper {
     align-items: center;
     background: #000;
     border-radius: 5px;
+    width: 80%;
 }
 
 nav {
@@ -126,14 +136,11 @@ nav a:first-of-type {
     nav a {
         padding: 0.5rem 1rem;
         border-left: none;
-        border-bottom: 1px solid grey;
+        border-top: 1px solid grey;
         width: 100%;
         text-align: center;
     }
 
-    nav a:last-of-type {
-        border-bottom: none;
-    }
 }
 
 @media (max-width: 480px) {
