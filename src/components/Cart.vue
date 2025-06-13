@@ -31,7 +31,7 @@ export default {
                 <XMarkIcon />
         </button>
             <h2>Your Cart</h2>
-            <p>(Cart items go here...)</p>
+            <p>Your cart is empty</p>
         </div>
         </div>
     </div>
