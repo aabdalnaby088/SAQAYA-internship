@@ -18,7 +18,6 @@ import Footage from '@/components/Footage.vue'
 <style scoped>
 .main-content {
     margin-top: 80px;
-    /* if your navbar is fixed */
     padding: 1rem;
 }
 </style>
