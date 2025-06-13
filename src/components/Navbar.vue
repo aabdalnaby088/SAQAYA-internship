@@ -41,7 +41,7 @@ export default {
         <RouterLink to="/contact-us" @click="closeMenu">Contact Us</RouterLink>
       </nav>
 
-      <button class="hamburger" @click="toggleMenu" :menu-opened="isMenuOpen">
+      <button class="hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
         <span></span>
         <span></span>
         <span></span>
