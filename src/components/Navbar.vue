@@ -1,9 +1,16 @@
 <script>
+import { ShoppingCartIcon } from '@heroicons/vue/24/solid'
+import CartDrawer from './Cart.vue'
 export default {
     data() {
         return {
-            isMenuOpen: false
+            isMenuOpen: false,
+            isCartOpen: false,
         }
+    },
+    components: {
+        ShoppingCartIcon,
+        CartDrawer,
     },
     methods: {
         toggleMenu() {
@@ -11,29 +18,47 @@ export default {
         },
         closeMenu() {
             this.isMenuOpen = false
-        }
-    }
+        },
+        toggleCart() {
+            this.isCartOpen = !this.isCartOpen
+            console.log(this.isCartOpen)
+            
+        },
+    },
 }
 </script>
 
 <template>
-    <header>
-        <div class="wrapper">
-            <h3>Hello vue 🥰</h3>
+  <header>
+    <div class="wrapper">
+      <RouterLink to="/">
+        <h3>Vue Store</h3>
+      </RouterLink>
 
-            <nav :class="{ 'open': isMenuOpen }">
-                <RouterLink to="/" @click="closeMenu">Home</RouterLink>
-                <RouterLink to="/products" @click="closeMenu">Products</RouterLink>
-                <RouterLink to="/contact-us" @click="closeMenu">Contact Us</RouterLink>
-            </nav>
-            <button class="hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+      <nav :class="{ open: isMenuOpen }">
+        <RouterLink to="/" @click="closeMenu">Home</RouterLink>
+        <RouterLink to="/products" @click="closeMenu">Products</RouterLink>
+        <RouterLink to="/contact-us" @click="closeMenu">Contact Us</RouterLink>
+      </nav>
+
+      <button class="hamburger" @click="toggleMenu" :menu-opened="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <button class="cart" @click="toggleCart">
+        <ShoppingCartIcon class="cart-icon" />
+      </button>
+
+      <teleport to='body'>
+        <CartDrawer :is-open="isCartOpen" @close="toggleCart" />
+      </teleport>
+
+    </div>
+  </header>
 </template>
+
 
 
 
@@ -44,7 +69,7 @@ header {
     top: 10px;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 800;
     display: flex;
     justify-content: center ;
 }
@@ -83,6 +108,10 @@ nav a:first-of-type {
     border: 0;
 }
 
+nav a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -114,6 +143,23 @@ nav a:first-of-type {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
+.cart {
+    background-color: transparent;
+    border:none;
+}
+
+.cart-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: white;
+    transition: 0.4s;
+}
+
+.cart-icon:hover {
+    color: hsla(160, 100%, 37%, 1);
+}
+
 @media (max-width: 768px) {
     .hamburger {
     display: flex;
@@ -121,7 +167,7 @@ nav a:first-of-type {
     nav {
         display: none;
         position: absolute;
-        top: 1%;
+        top: 100%;
         left: 0;
         right: 0;
         background: #000;
