@@ -1,17 +1,20 @@
-<script setup lang="ts">
+<script lang="ts">
 
+export default {};
 </script>
 
 <template>
   <main>
-    This is the home page
-    <br>
+    This is the home page <span class="count">{{ $store.state.count }}</span>
+    <br />
     our landing page goes here
+    <br />
+    <button @click="$store.commit('increment')">Increment</button>
   </main>
 </template>
 
 <style scoped>
-main{
+main {
   text-align: center;
   padding: 20px;
   font-size: 20px;
