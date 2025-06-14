@@ -1,4 +1,3 @@
-declare module "vuex";
 import { Store } from "vuex";
 import { State } from "./store";
 
