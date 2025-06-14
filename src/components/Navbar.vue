@@ -2,6 +2,7 @@
 import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
 import CartDrawer from "./Cart.vue";
 export default {
+  name: "Navbar",
   data() {
     return {
       isMenuOpen: false,
