@@ -1,23 +1,19 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { RouterView } from 'vue-router';
-import MainLayout from './Layouts/MainLayout.vue';
+import { defineComponent } from "vue";
+import { RouterView } from "vue-router";
+import MainLayout from "./Layouts/MainLayout.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     RouterView,
-    MainLayout
+    MainLayout,
   },
 });
 </script>
-
 
 <template>
   <MainLayout>
     <RouterView />
   </MainLayout>
 </template>
-
-
-

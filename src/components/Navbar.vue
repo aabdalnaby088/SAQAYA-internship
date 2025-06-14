@@ -1,31 +1,34 @@
 <script>
-import { ShoppingCartIcon } from '@heroicons/vue/24/solid'
-import CartDrawer from './Cart.vue'
+import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
+import CartDrawer from "./Cart.vue";
 export default {
-    data() {
-        return {
-            isMenuOpen: false,
-            isCartOpen: false,
-        }
+  data() {
+    return {
+      isMenuOpen: false,
+      isCartOpen: false,
+    };
+  },
+  components: {
+    ShoppingCartIcon,
+    CartDrawer,
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
     },
-    components: {
-        ShoppingCartIcon,
-        CartDrawer,
+    closeMenu() {
+      this.isMenuOpen = false;
     },
-    methods: {
-        toggleMenu() {
-            this.isMenuOpen = !this.isMenuOpen
-        },
-        closeMenu() {
-            this.isMenuOpen = false
-        },
-        toggleCart() {
-            this.isCartOpen = !this.isCartOpen
-            console.log(this.isCartOpen)
-            
-        },
+    toggleCart() {
+      this.isCartOpen = !this.isCartOpen;
     },
-}
+  },
+  computed: {
+    cartCount() {
+      return this.$store.state.count;
+    },
+  },
+};
 </script>
 
 <template>
@@ -49,153 +52,164 @@ export default {
 
       <button class="cart" @click="toggleCart">
         <ShoppingCartIcon class="cart-icon" />
+        <span class="cart-count">{{ cartCount }}</span>
       </button>
 
-      <teleport to='body'>
+      <teleport to="body">
         <CartDrawer :is-open="isCartOpen" @close="toggleCart" />
       </teleport>
-
     </div>
   </header>
 </template>
 
-
-
-
 <style scoped>
-
 header {
-    position: fixed;
-    top: 10px;
-    left: 0;
-    width: 100%;
-    z-index: 800;
-    display: flex;
-    justify-content: center ;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  z-index: 800;
+  display: flex;
+  justify-content: center;
 }
 
-h3{
-    color: hsla(160, 100%, 37%, 1);
+h3 {
+  color: hsla(160, 100%, 37%, 1);
 }
 
 header .wrapper {
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #000;
-    border-radius: 5px;
-    width: 80%;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  border-radius: 5px;
+  width: 80%;
 }
 
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 nav a.router-link-exact-active {
-    color: white;
+  color: white;
 }
 
 nav a {
-    display: inline-block;
-    padding: 0 1rem;
-    border-left: 1px solid grey;
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid grey;
 }
 
 nav a:first-of-type {
-    border: 0;
+  border: 0;
 }
 
 nav a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+  background-color: hsla(160, 100%, 37%, 0.2);
 }
 
 .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .hamburger span {
-    width: 100%;
-    height: 3px;
-    background: white;
-    transition: all 0.3s ease;
+  width: 100%;
+  height: 3px;
+  background: white;
+  transition: all 0.3s ease;
 }
 
 .hamburger[menuOpened="true"] span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .hamburger[menuOpened="true"] span:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 
 .hamburger[menuOpened="true"] span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .cart {
-    background-color: transparent;
-    border:none;
+  background-color: transparent;
+  border: none;
+  position: relative;
 }
 
 .cart-icon {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    color: white;
-    transition: 0.4s;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: white;
+  transition: 0.4s;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
 }
 
 .cart-icon:hover {
-    color: hsla(160, 100%, 37%, 1);
+  color: hsla(160, 100%, 37%, 1);
 }
 
 @media (max-width: 768px) {
-    .hamburger {
+  .hamburger {
     display: flex;
-   }
-    nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #000;
-        flex-direction: column;
-        padding: 1rem;
-    }
+  }
+  nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #000;
+    flex-direction: column;
+    padding: 1rem;
+  }
 
-    nav.open {
-        display: flex;
-    }
+  nav.open {
+    display: flex;
+  }
 
-    nav a {
-        padding: 0.5rem 1rem;
-        border-left: none;
-        border-top: 1px solid grey;
-        width: 100%;
-        text-align: center;
-    }
-
+  nav a {
+    padding: 0.5rem 1rem;
+    border-left: none;
+    border-top: 1px solid grey;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
-    header .wrapper {
-        padding: 0 0.5rem;
-    }
+  header .wrapper {
+    padding: 0 0.5rem;
+  }
 
-    h3 {
-        font-size: 1.2rem;
-    }
+  h3 {
+    font-size: 1.2rem;
+  }
 }
 </style>

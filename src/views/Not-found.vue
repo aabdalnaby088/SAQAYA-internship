@@ -76,7 +76,6 @@ p {
 }
 
 @media (max-width: 480px) {
-
   .home-btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;

@@ -1,14 +1,38 @@
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginVue from "eslint-plugin-vue";
-import { defineConfig } from "eslint/config";
-
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import vue from 'eslint-plugin-vue';
+import prettier from 'eslint-config-prettier';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"], plugins: { js }, extends: ["js/recommended"] },
-  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"], languageOptions: { globals: globals.browser } },
-  tseslint.configs.recommended,
-  pluginVue.configs["flat/essential"],
-  { files: ["**/*.vue"], languageOptions: { parserOptions: { parser: tseslint.parser } } },
+  {
+    files: ['**/*.{js,ts,vue}'],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: './tsconfig.json',
+        projectService: true,
+        extraFileExtensions: ['.vue'],
+      },
+      globals: globals.browser,
+    },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      vue,
+    },
+  },
+
+  ...tseslint.configs.recommended,
+
+  vue.configs['flat/essential'],
+
+  {
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+
+  prettier,
 ]);

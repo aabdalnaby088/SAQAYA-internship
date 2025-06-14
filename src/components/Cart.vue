@@ -1,47 +1,44 @@
 <script>
-import { XMarkIcon } from '@heroicons/vue/24/solid'
+import { XMarkIcon } from "@heroicons/vue/24/solid";
 export default {
-    name: 'CartDrawer',
-    props: {
-        isOpen: {
-            type: Boolean,
-            required: true,
-        },
+  name: "CartDrawer",
+  props: {
+    isOpen: {
+      type: Boolean,
+      required: true,
     },
-    components: {
-        XMarkIcon,
+  },
+  components: {
+    XMarkIcon,
+  },
+  methods: {
+    handleClose() {
+      this.$emit("close");
     },
-    methods: {
-        handleClose() {
-            this.$emit('close')
-        },
-    },
-}
+  },
+};
 </script>
 
 <template>
-    <div class="container">
-       
-        <!-- Backdrop -->
-        <div :class="['backdrop', { show: isOpen }]" @click.self = 'handleClose' >
-
-        <!-- Sliding Drawer -->
-        <div :class="['cart-drawer', { open: isOpen }]">
-             <button class="close-btn" @click="handleClose">
-                <XMarkIcon />
+  <div class="container">
+    <!-- Backdrop -->
+    <div :class="['backdrop', { show: isOpen }]" @click.self="handleClose">
+      <!-- Sliding Drawer -->
+      <div :class="['cart-drawer', { open: isOpen }]">
+        <button class="close-btn" @click="handleClose">
+          <XMarkIcon />
         </button>
-            <h2>Your Cart</h2>
-            <p>Your cart is empty</p>
-        </div>
-        </div>
+        <h2>Your Cart</h2>
+        <p>Your cart is empty</p>
+        <p>counter: {{ $store.state.count }}</p>
+      </div>
     </div>
+  </div>
 </template>
 
-
-
 <style scoped>
-.container{
-    position:relative;
+.container {
+  position: relative;
 }
 .backdrop {
   position: fixed;
@@ -74,19 +71,18 @@ export default {
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
-
 /* Drawer visible */
 .cart-drawer.open {
-    transform: translateX(0);
+  transform: translateX(0);
 }
-.close-btn{
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+.close-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 </style>
