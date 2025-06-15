@@ -1,6 +1,7 @@
 <script lang="ts">
-
-export default {};
+export default {
+  name: "Home",
+};
 </script>
 
 <template>

@@ -1,6 +1,8 @@
-<script>
+<script lang="ts">
 import { XMarkIcon } from "@heroicons/vue/24/solid";
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "CartDrawer",
   props: {
     isOpen: {
@@ -16,7 +18,7 @@ export default {
       this.$emit("close");
     },
   },
-};
+});
 </script>
 
 <template>
