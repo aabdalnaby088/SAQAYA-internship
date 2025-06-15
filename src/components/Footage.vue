@@ -1,3 +1,11 @@
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "Footage",
+});
+</script>
+
 <template>
   <footer class="footer">
     <div class="dec">

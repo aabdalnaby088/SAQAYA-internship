@@ -10,9 +10,18 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import Navbar from "@/components/Navbar.vue";
-import Footage from "@/components/Footage.vue";
+<script lang="ts">
+import Navbar from "../components/Navbar.vue";
+import Footage from "../components/Footage.vue";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "MainLayout",
+  components: {
+    Navbar,
+    Footage,
+  },
+});
 </script>
 
 <style scoped>

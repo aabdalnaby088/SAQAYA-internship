@@ -7,8 +7,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Notfound from "../assets/Notfound.svg";
+
 export default {
   name: "NotFound",
   data() {

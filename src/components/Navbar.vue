@@ -1,17 +1,25 @@
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
-import CartDrawer from "./Cart.vue";
-export default {
+import CartDrawer from "./CartDrawer.vue";
+import Footage from "./Footage.vue";
+export default defineComponent({
   name: "Navbar",
+  components: {
+    ShoppingCartIcon,
+    CartDrawer,
+    Footage
+  },
   data() {
     return {
       isMenuOpen: false,
       isCartOpen: false,
     };
   },
-  components: {
-    ShoppingCartIcon,
-    CartDrawer,
+  computed: {
+    cartCount() {
+      return this.$store.state.count;
+    },
   },
   methods: {
     toggleMenu() {
@@ -24,12 +32,7 @@ export default {
       this.isCartOpen = !this.isCartOpen;
     },
   },
-  computed: {
-    cartCount() {
-      return this.$store.state.count;
-    },
-  },
-};
+});
 </script>
 
 <template>
