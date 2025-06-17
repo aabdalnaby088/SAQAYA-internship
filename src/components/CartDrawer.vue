@@ -31,6 +31,7 @@ export default defineComponent({
           <XMarkIcon />
         </button>
         <h2>Your Cart</h2>
+        <hr>
         <p>Your cart is empty</p>
         <p>counter: {{ $store.state.count }}</p>
       </div>
@@ -54,18 +55,19 @@ export default defineComponent({
 
 .backdrop.show {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
   pointer-events: auto;
 }
 
-/* Drawer */
 .cart-drawer {
   position: fixed;
   top: 0;
   right: 0;
   height: 100vh;
   width: 300px;
-  background: white;
+  background: #1f2930;
+  color: white;
+  text-align: center;
   transform: translateX(100%);
   transition: transform 0.4s ease;
   z-index: 999;
@@ -73,7 +75,6 @@ export default defineComponent({
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Drawer visible */
 .cart-drawer.open {
   transform: translateX(0);
 }
@@ -85,6 +86,7 @@ export default defineComponent({
   right: 10px;
   border: none;
   background: transparent;
+  color: white;
   cursor: pointer;
 }
 </style>
