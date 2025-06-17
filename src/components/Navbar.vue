@@ -69,7 +69,7 @@ export default defineComponent({
 <style scoped>
 header {
   position: fixed;
-  top: 10px;
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 800;
@@ -78,7 +78,7 @@ header {
 }
 
 h3 {
-  color: hsla(160, 100%, 37%, 1);
+  color: #000;
 }
 
 header .wrapper {
@@ -86,9 +86,8 @@ header .wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #000;
-  border-radius: 5px;
-  width: 80%;
+  background: #A1A1A1;
+  width: 100%;
 }
 
 nav {
@@ -112,7 +111,7 @@ nav a:first-of-type {
 }
 
 nav a:hover {
-  background-color: hsla(160, 100%, 37%, 0.2);
+  background-color: #383333;
 }
 
 .hamburger {
@@ -156,7 +155,7 @@ nav a:hover {
   width: 24px;
   height: 24px;
   cursor: pointer;
-  color: white;
+  color: #000;
   transition: 0.4s;
 }
 
@@ -176,7 +175,7 @@ nav a:hover {
 }
 
 .cart-icon:hover {
-  color: hsla(160, 100%, 37%, 1);
+  color: #383333;
 }
 
 @media (max-width: 768px) {
