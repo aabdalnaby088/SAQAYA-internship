@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Navbar from "../components/Navbar.vue";
-import Footage from "../components/Footage.vue";
+import Footage from "../components/FootageSection.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

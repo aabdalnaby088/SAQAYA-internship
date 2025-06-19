@@ -2,14 +2,14 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Footage",
+  name: "FootageSection",
 });
 </script>
 
 <template>
   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-content">
+    <div class="footerContainer">
+      <div class="footerContainer__content">
         <div class="footer-links">
           <div class="column">
             <h4>Navigate</h4>
@@ -56,8 +56,8 @@ export default defineComponent({
   
         </div>
       </div>
-      <div class="footer-copyright">
-        <p class="copyright">Copyright © All Rights Reserved 2020</p>
+      <div class="footerContainer__content--copyright">
+        <p >Copyright © All Rights Reserved 2020</p>
       </div>
     </div>
   </footer>
@@ -72,12 +72,12 @@ export default defineComponent({
   color: #222;
 }
 
-.footer-container {
+.footerContainer {
     width: 90%;
   margin: 0 auto;
 }
 
-.footer-content{
+.footerContainer__content{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

@@ -1,11 +1,11 @@
 <script lang="ts">
 export default {
-  name: "Home",
+  name: "HomePage",
 };
 </script>
 
 <template>
-  <main>
+  <main class="homePage">
     This is the home page <span class="count">{{ $store.state.count }}</span>
     <br />
     our landing page goes here
@@ -15,7 +15,7 @@ export default {
 </template>
 
 <style scoped>
-main {
+.homePage {
   text-align: center;
   padding: 20px;
   font-size: 20px;
