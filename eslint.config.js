@@ -1,8 +1,8 @@
+import prettier from "eslint-config-prettier";
+import vue from "eslint-plugin-vue";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import vue from "eslint-plugin-vue";
-import prettier from "eslint-config-prettier";
-import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
@@ -30,7 +30,7 @@ export default defineConfig([
 
   {
     rules: {
-      "vue/multi-word-component-names": "off",
+      // "vue/multi-word-component-names": "off",
     },
   },
 

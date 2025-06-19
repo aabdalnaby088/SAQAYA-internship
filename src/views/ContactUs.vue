@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-us">
+  <section class="contactUs">
     <h1>Contact us</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit temporibus
@@ -11,7 +11,7 @@
 </template>
 
 <style scoped>
-.contact-us {
+.contactUs {
   text-align: center;
   font-size: 20px;
 }

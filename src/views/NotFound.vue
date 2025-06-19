@@ -1,9 +1,9 @@
 <template>
-  <div class="not-found">
-    <img :src="Notfound" alt="Page not found" class="not-found-svg" />
-    <h1>Oops! Page Not Found</h1>
-    <p>Sorry, the page you're looking for doesn't exist.</p>
-    <RouterLink to="/" class="home-btn">Back to Home</RouterLink>
+  <div class="notFound">
+    <img :src="Notfound" alt="Page not found" class="notFound__svg" />
+    <h1 class="notFound__title">Oops! Page Not Found</h1>
+    <p class="notFound__description">Sorry, the page you're looking for doesn't exist.</p>
+    <RouterLink to="/" class="notFound__btn">Back to Home</RouterLink>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.not-found {
+.notFound {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,24 +31,24 @@ export default {
   padding: 2rem;
 }
 
-.not-found-svg {
+.notFound__svg {
   width: 55%;
   margin-bottom: 1.5rem;
 }
 
-h1 {
+.notFound__title {
   font-size: 2rem;
   color: #333;
   margin-bottom: 0.5rem;
 }
 
-p {
+.notFound__description {
   font-size: 1.1rem;
   color: #555;
   margin-bottom: 1.5rem;
 }
 
-.home-btn {
+.notFound__btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   background: #000;
@@ -58,26 +58,26 @@ p {
   transition: background 0.3s ease;
 }
 
-.home-btn:hover {
+.notFound__btn:hover {
   background: #333;
 }
 
 @media (max-width: 768px) {
-  .not-found {
+  .notFound {
     padding: 1rem;
   }
 
-  h1 {
+  .notFound__title {
     font-size: 1.5rem;
   }
 
-  p {
+  .notFound__description {
     font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .home-btn {
+  .notFound__btn{
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }

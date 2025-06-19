@@ -22,12 +22,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="container">
-    <!-- Backdrop -->
-    <div :class="['backdrop', { show: isOpen }]" @click.self="handleClose">
-      <!-- Sliding Drawer -->
-      <div :class="['cart-drawer', { open: isOpen }]">
-        <button class="close-btn" @click="handleClose">
+  <div class="cart-drawer">
+    <div :class="['cart-drawer__backdrop', { 'cart-drawer__backdrop--show': isOpen }]" @click.self="handleClose">
+      <div :class="['cart-drawer__panel', { 'cart-drawer__panel--open': isOpen }]">
+        <button class="cart-drawer__close-btn" @click="handleClose">
           <XMarkIcon />
         </button>
         <h2>Your Cart</h2>
@@ -40,10 +38,10 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.container {
+.cart-drawer {
   position: relative;
 }
-.backdrop {
+.cart-drawer__backdrop {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0);
@@ -53,13 +51,13 @@ export default defineComponent({
   z-index: 998;
 }
 
-.backdrop.show {
+.cart-drawer__backdrop--show {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.4);
   pointer-events: auto;
 }
 
-.cart-drawer {
+.cart-drawer__panel {
   position: fixed;
   top: 0;
   right: 0;
@@ -75,10 +73,10 @@ export default defineComponent({
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.cart-drawer.open {
+.cart-drawer__panel--open {
   transform: translateX(0);
 }
-.close-btn {
+.cart-drawer__close-btn {
   width: 30px;
   height: 30px;
   position: absolute;

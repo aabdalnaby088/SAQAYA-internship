@@ -1,20 +1,19 @@
 <template>
-    <router-link :to="`/products/${product.id}`" class="product-card" >
-    <img :src="product.image" :alt="product.title" class="product-image" />
-    <div class="product-details">
-      <h2 class="product-title">{{ product.title }}</h2>
-      <div class="product-price-rating">
-        <p class="product-price">${{ product.price.toFixed(2) }}</p>
-      <p class="product-rating">⭐ {{ product.rating.rate }}</p>
+    <router-link :to="`/products/${product.id}`" class="card" >
+    <img :src="product.image" :alt="product.title" class="card__image" />
+    <div class="card__description">
+      <h2 class="card__title">{{ product.title }}</h2>
+      <div class="card__details">
+        <p class="card__details--price">${{ product.price.toFixed(2) }}</p>
+      <p class="card__details--rating">⭐ {{ product.rating.rate }}</p>
       </div>
     </div>
   </router-link>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { type PropType } from "vue";
-import { type Product } from "../Types/Product";
+import { defineComponent, type PropType } from "vue";
+import { type Product } from "../types/product";
 
 export default defineComponent({
   name: "ProductCard",
@@ -28,7 +27,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.product-card {
+.card{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,11 +42,11 @@ export default defineComponent({
   color: #2d3748;
 }
 
-.product-card:hover {
+.card:hover {
   transform: scale(1.05);
 }
 
-.product-image {
+.card__image {
   width: 100%;
   height: 150px;
   object-fit: contain;
@@ -57,25 +56,31 @@ export default defineComponent({
 
 }
 
-.product-details {
+.card__description {
   padding: 0.75rem 1rem;
 }
 
-.product-title {
+.card__title {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; 
+           line-clamp: 2;
+   -webkit-box-orient: vertical;
 }
 
-.product-price {
+.card__details--price {
   color: #2d3748;
   font-weight: bold;
   margin-bottom: 0.25rem;
 }
 
-.product-rating {
+.card__details--rating {
   color: #ffa500;
 }
-.product-price-rating{
+.card__details{
   display: flex;
   justify-content: space-between;
 }

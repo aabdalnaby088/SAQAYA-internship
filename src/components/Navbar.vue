@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent } from "vue";
 import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
+import { defineComponent } from "vue";
 import CartDrawer from "./CartDrawer.vue";
-import Footage from "./Footage.vue";
+import Footage from "./FootageSection.vue";
 export default defineComponent({
   name: "Navbar",
   components: {
@@ -12,8 +12,8 @@ export default defineComponent({
   },
   data() {
     return {
-      isMenuOpen: false,
-      isCartOpen: false,
+      isMenuOpen: false as boolean,
+      isCartOpen: false as boolean,
     };
   },
   computed: {
@@ -36,27 +36,27 @@ export default defineComponent({
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
+  <header class="siteHeader">
+    <div class="siteHeader__wrapper">
       <RouterLink to="/">
-        <h3>Vue Store</h3>
+        <h3 class="siteHeader__title">Vue Store</h3>
       </RouterLink>
 
-      <nav :class="{ open: isMenuOpen }">
-        <RouterLink to="/" @click="closeMenu">Home</RouterLink>
-        <RouterLink to="/products" @click="closeMenu">Products</RouterLink>
-        <RouterLink to="/contact-us" @click="closeMenu">Contact Us</RouterLink>
+      <nav  :class="[ 'siteHeader__nav', { 'siteHeader__nav--open': isMenuOpen }]">
+        <RouterLink class="siteHeader__link" to="/" @click="closeMenu">Home</RouterLink>
+        <RouterLink class="siteHeader__link" to="/products" @click="closeMenu">Products</RouterLink>
+        <RouterLink class="siteHeader__link" to="/contactUs" @click="closeMenu">Contact Us</RouterLink>
       </nav>
 
-      <button class="hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="sideHeader__hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
+        <span class="sideHeader__bar"></span>
+        <span class="sideHeader__bar"></span>
+        <span class="sideHeader__bar"></span>
       </button>
 
-      <button class="cart" @click="toggleCart">
-        <ShoppingCartIcon class="cart-icon" />
-        <span class="cart-count">{{ cartCount }}</span>
+      <button class="site-header__cartbtn" @click="toggleCart">
+        <ShoppingCartIcon class="site-header__cartIcon" />
+        <span class="site-header__cartCount">{{ cartCount }}</span>
       </button>
 
       <teleport to="body">
@@ -67,7 +67,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
-header {
+.siteHeader {
   position: fixed;
   top: 0;
   left: 0;
@@ -77,11 +77,11 @@ header {
   justify-content: center;
 }
 
-h3 {
+.siteHeader__title {
   color: #000;
 }
 
-header .wrapper {
+.siteHeader__wrapper {
   padding: 0 1rem;
   display: flex;
   justify-content: space-between;
@@ -90,31 +90,31 @@ header .wrapper {
   width: 100%;
 }
 
-nav {
+.siteHeader__nav {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-nav a.router-link-exact-active {
+.siteHeader__link.router-link-exact-active {
   color: white;
 }
 
-nav a {
+.siteHeader__link {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid grey;
 }
 
-nav a:first-of-type {
+.siteHeader__link:first-of-type {
   border: 0;
 }
 
-nav a:hover {
+.siteHeader__link:hover {
   background-color: #383333;
 }
 
-.hamburger {
+.sideHeader__hamburger {
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -126,32 +126,32 @@ nav a:hover {
   padding: 0;
 }
 
-.hamburger span {
+.sideHeader__bar {
   width: 100%;
   height: 3px;
   background: white;
   transition: all 0.3s ease;
 }
 
-.hamburger[menuOpened="true"] span:nth-child(1) {
+.sideHeader__hamburger[menuOpened="true"] .sideHeader__bar:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
 
-.hamburger[menuOpened="true"] span:nth-child(2) {
+.sideHeader__hamburger[menuOpened="true"] .sideHeader__bar:nth-child(2) {
   opacity: 0;
 }
 
-.hamburger[menuOpened="true"] span:nth-child(3) {
+.sideHeader__hamburger[menuOpened="true"] .sideHeader__bar:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
-.cart {
+.site-header__cartbtn {
   background-color: transparent;
   border: none;
   position: relative;
 }
 
-.cart-icon {
+.site-header__cartIcon {
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -159,7 +159,7 @@ nav a:hover {
   transition: 0.4s;
 }
 
-.cart-count {
+.site-header__cartCount {
   position: absolute;
   top: 0;
   right: 0;
@@ -174,15 +174,15 @@ nav a:hover {
   font-size: 10px;
 }
 
-.cart-icon:hover {
+.site-header__cartCount:hover {
   color: #383333;
 }
 
 @media (max-width: 768px) {
-  .hamburger {
+  .sideHeader__hamburger {
     display: flex;
   }
-  nav {
+  .siteHeader__nav {
     display: none;
     position: absolute;
     top: 100%;
@@ -193,11 +193,11 @@ nav a:hover {
     padding: 1rem;
   }
 
-  nav.open {
+  .siteHeader__nav--open {
     display: flex;
   }
 
-  nav a {
+  .siteHeader__link {
     padding: 0.5rem 1rem;
     border-left: none;
     border-top: 1px solid grey;
@@ -207,11 +207,11 @@ nav a:hover {
 }
 
 @media (max-width: 480px) {
-  header .wrapper {
+.siteHeader__wrapper {
     padding: 0 0.5rem;
   }
 
-  h3 {
+  .siteHeader__title {
     font-size: 1.2rem;
   }
 }
