@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dummyData, type Product } from '../types/Product';
+import { dummyData, type Product } from '../types/product';
 export default defineComponent({
   name: 'ProductDetails',
   props: {

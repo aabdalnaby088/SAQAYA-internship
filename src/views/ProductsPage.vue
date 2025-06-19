@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
+import { getProducts } from "@/services/productsService";
 import { defineComponent } from "vue";
 import ProductCard from "../components/ProductCard.vue";
-import { type Product } from "../types/Product";
-import { getProducts } from "@/services/productsService";
+import { type Product } from "../types/product";
 export default defineComponent({
   name: "ProductList",
   components: {

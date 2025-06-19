@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
-import { type Product } from "../types/Product";
+import { type Product } from "../types/product";
 
 export default defineComponent({
   name: "ProductCard",
