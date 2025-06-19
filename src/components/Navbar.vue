@@ -3,12 +3,14 @@ import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
 import CartDrawer from "./CartDrawer.vue";
 import Footage from "./FootageSection.vue";
+import Hamburger from "./Hamburger.vue";
 export default defineComponent({
   name: "Navbar",
   components: {
     ShoppingCartIcon,
     CartDrawer,
-    Footage
+    Footage,
+    Hamburger,
   },
   data() {
     return {
@@ -48,11 +50,7 @@ export default defineComponent({
         <RouterLink class="siteHeader__link" to="/contactUs" @click="closeMenu">Contact Us</RouterLink>
       </nav>
 
-      <button class="sideHeader__hamburger" @click="toggleMenu" :menuOpened="isMenuOpen">
-        <span class="sideHeader__bar"></span>
-        <span class="sideHeader__bar"></span>
-        <span class="sideHeader__bar"></span>
-      </button>
+      <Hamburger :isMenuOpen="isMenuOpen" @closeHamburger="toggleMenu" />
 
       <button class="site-header__cartbtn" @click="toggleCart">
         <ShoppingCartIcon class="site-header__cartIcon" />
@@ -114,36 +112,6 @@ export default defineComponent({
   background-color: #383333;
 }
 
-.sideHeader__hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 20px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.sideHeader__bar {
-  width: 100%;
-  height: 3px;
-  background: white;
-  transition: all 0.3s ease;
-}
-
-.sideHeader__hamburger[menuOpened="true"] .sideHeader__bar:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.sideHeader__hamburger[menuOpened="true"] .sideHeader__bar:nth-child(2) {
-  opacity: 0;
-}
-
-.sideHeader__hamburger[menuOpened="true"] .sideHeader__bar:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
-}
 
 .site-header__cartbtn {
   background-color: transparent;
@@ -179,9 +147,6 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
-  .sideHeader__hamburger {
-    display: flex;
-  }
   .siteHeader__nav {
     display: none;
     position: absolute;
