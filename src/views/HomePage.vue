@@ -10,7 +10,6 @@ export default {
     <br />
     our landing page goes here
     <br />
-    <button @click="$store.commit('increment')">Increment</button>
   </main>
 </template>
 
