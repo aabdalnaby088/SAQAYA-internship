@@ -52,7 +52,7 @@ export default defineComponent({
 
       <button class="site-header__cartbtn" @click="toggleCart">
         <ShoppingCartIcon class="site-header__cartIcon" />
-        <span class="site-header__cartCount">{{ cartCount }}</span>
+        <!-- <span class="site-header__cartCount">{{ cartCount }}</span> -->
       </button>
 
       <teleport to="body">

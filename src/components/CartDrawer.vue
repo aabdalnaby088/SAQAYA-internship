@@ -39,7 +39,6 @@ export default defineComponent({
         <h2>Your Cart</h2>
         <hr />
         <p>Your cart is empty</p>
-        <p>counter: {{ $store.state.count }}</p>
       </div>
     </div>
   </div>

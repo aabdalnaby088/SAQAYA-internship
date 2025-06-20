@@ -1,23 +1,12 @@
 import { createStore } from "vuex";
+import products, { type ProductsState } from "./modules/products";
 
-interface State {
-  count: number;
+export interface RootState {
+  products: ProductsState;
 }
 
-const initialState: State = {
-  count: 0,
-};
-
-export const store = createStore({
-  state: initialState,
-  mutations: {
-    increment(state: State) {
-      state.count++;
-    },
-  },
-  getters: {
-    doubleCount(state: State) {
-      return state.count * 2;
-    },
+export default createStore({
+  modules: {
+    products,
   },
 });

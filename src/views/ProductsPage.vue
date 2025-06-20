@@ -1,37 +1,36 @@
 <template>
-  <div class="productsContainer" v-show="!isLoading">
+  <div class="productsContainer" v-show="!loading">
     <ProductCard
-      v-for="product in products"
+      v-for="product in items"
       :key="product.id"
       :product="product"
     />
   </div>
 
-  <LoadingSpinner v-show="isLoading" />
+  <LoadingSpinner v-show="loading" />
 </template>
 
 <script lang="ts">
-import { getProducts } from "@/services/productsService";
 import { defineComponent } from "vue";
 import ProductCard from "../components/ProductCard.vue";
-import { type Product } from "../types/product";
 import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
+import { mapActions, mapState } from "vuex";
 export default defineComponent({
   name: "ProductList",
   components: {
     ProductCard,
     LoadingSpinner,
   },
-  data() {
-    return {
-      products: [] as Product[],
-      isLoading: false,
-    };
+
+  computed: {
+    ...mapState("products", ["items", "loading", "error"]),
   },
-  async created() {
-    this.isLoading = true;
-    this.products = await getProducts();
-    this.isLoading = false;
+  created() {
+    this.fetchProducts();
+    console.log(this.error);
+  },
+  methods: {
+    ...mapActions("products", ["fetchProducts"]),
   },
 });
 </script>

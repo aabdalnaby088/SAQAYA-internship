@@ -29,9 +29,7 @@ export default defineConfig([
   vue.configs["flat/essential"],
 
   {
-    rules: {
-      // "vue/multi-word-component-names": "off",
-    },
+    rules: {},
   },
 
   prettier,
