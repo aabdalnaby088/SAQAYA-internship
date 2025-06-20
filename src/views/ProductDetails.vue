@@ -1,6 +1,10 @@
 <template>
   <div class="productDetails">
-    <img :src="product?.image" alt="Product Image" class="productDetails__image" />
+    <img
+      :src="product?.image"
+      alt="Product Image"
+      class="productDetails__image"
+    />
 
     <div class="productDetails__info">
       <h1>{{ product?.title }}</h1>
@@ -12,10 +16,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { dummyData, type Product } from '../types/product';
+import { defineComponent } from "vue";
+import { dummyData, type Product } from "../types/product";
 export default defineComponent({
-  name: 'ProductDetails',
+  name: "ProductDetails",
   props: {
     id: {
       type: String,
@@ -27,15 +31,16 @@ export default defineComponent({
       product: undefined as Product | undefined,
     };
   },
-   created() {
-    const product  = dummyData.find((product) => product.id === parseInt(this.id));
+  created() {
+    const product = dummyData.find(
+      (product) => product.id === parseInt(this.id),
+    );
     if (!product) {
-      this.$router.push({ name: 'NotFound' });
-    }else{
+      this.$router.push({ name: "NotFound" });
+    } else {
       this.product = product;
     }
-
-   }
+  },
 });
 </script>
 

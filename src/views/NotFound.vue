@@ -2,7 +2,9 @@
   <div class="notFound">
     <img :src="Notfound" alt="Page not found" class="notFound__svg" />
     <h1 class="notFound__title">Oops! Page Not Found</h1>
-    <p class="notFound__description">Sorry, the page you're looking for doesn't exist.</p>
+    <p class="notFound__description">
+      Sorry, the page you're looking for doesn't exist.
+    </p>
     <RouterLink to="/" class="notFound__btn">Back to Home</RouterLink>
   </div>
 </template>
@@ -77,7 +79,7 @@ export default {
 }
 
 @media (max-width: 480px) {
-  .notFound__btn{
+  .notFound__btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
