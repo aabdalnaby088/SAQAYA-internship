@@ -1,8 +1,8 @@
 <script lang="ts">
 import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
-import CartDrawer from "./CartDrawer.vue";
-import Footage from "./FootageSection.vue";
+import CartDrawer from "../CartDrawer.vue";
+import Footage from "../FootageSection.vue";
 import Hamburger from "./HamburgerMenu.vue";
 import NavLinks from "./NavLinks.vue";
 export default defineComponent({

@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Footage from "../components/FootageSection.vue";
-import Navbar from "../components/Navbar.vue";
+import Navbar from "../components/navbar/Navbar.vue";
 
 export default defineComponent({
   name: "MainLayout",

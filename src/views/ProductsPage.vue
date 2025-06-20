@@ -6,9 +6,8 @@
       :product="product"
     />
   </div>
-  <div v-show="isLoading" class="loading">
-    <img src="../assets/loading.png" alt="loading" />
-  </div>
+
+  <LoadingSpinner v-show="isLoading" />
 </template>
 
 <script lang="ts">
@@ -16,10 +15,12 @@ import { getProducts } from "@/services/productsService";
 import { defineComponent } from "vue";
 import ProductCard from "../components/ProductCard.vue";
 import { type Product } from "../types/product";
+import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
 export default defineComponent({
   name: "ProductList",
   components: {
     ProductCard,
+    LoadingSpinner,
   },
   data() {
     return {
@@ -43,24 +44,5 @@ export default defineComponent({
   justify-content: center;
   margin-top: 2rem;
   align-items: center;
-}
-.loading {
-  display: flex;
-  height: 50vh;
-  justify-content: center;
-  align-items: center;
-  animation-name: spin;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 </style>

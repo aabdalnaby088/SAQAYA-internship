@@ -1,8 +1,8 @@
 <template>
-  <div class="productDetails">
+  <div class="productDetails" v-show="!isLoading">
     <img
       :src="product?.image"
-      alt="Product Image"
+      :alt="product?.title"
       class="productDetails__image"
     />
 
@@ -13,13 +13,20 @@
       <p class="productDetails__description">{{ product?.description }}</p>
     </div>
   </div>
+
+  <LoadingSpinner v-show="isLoading" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { dummyData, type Product } from "../types/product";
+import { type Product } from "../types/product";
+import { getProduct } from "../services/productsService";
+import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
 export default defineComponent({
   name: "ProductDetails",
+  components: {
+    LoadingSpinner,
+  },
   props: {
     id: {
       type: String,
@@ -29,12 +36,13 @@ export default defineComponent({
   data() {
     return {
       product: undefined as Product | undefined,
+      isLoading: false,
     };
   },
-  created() {
-    const product = dummyData.find(
-      (product) => product.id === parseInt(this.id),
-    );
+  async created() {
+    this.isLoading = true;
+    const product = await getProduct(parseInt(this.id));
+    this.isLoading = false;
     if (!product) {
       this.$router.push({ name: "NotFound" });
     } else {
@@ -50,12 +58,16 @@ export default defineComponent({
   gap: 2rem;
   padding: 2rem;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .productDetails__image {
-  max-width: 300px;
+  max-width: 500px;
+  max-height: 500px;
   width: 100%;
   border-radius: 8px;
+  object-fit: contain;
 }
 
 .productDetails__info {
@@ -76,5 +88,13 @@ export default defineComponent({
 .productDetails__description {
   color: #555;
   line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .productDetails {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 </style>
