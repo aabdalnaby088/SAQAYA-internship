@@ -1,14 +1,17 @@
 <template>
-  <router-link :to="`/products/${product.id}`" class="card">
-    <img :src="product.image" :alt="product.title" class="card__image" />
-    <div class="card__description">
-      <h2 class="card__title">{{ product.title }}</h2>
-      <div class="card__details">
-        <p class="card__details--price">${{ product.price.toFixed(2) }}</p>
-        <p class="card__details--rating">⭐ {{ product.rating.rate }}</p>
+  <div class="card">
+    <router-link :to="`/products/${product.id}`" class="card__Content">
+      <img :src="product.image" :alt="product.title" class="card__image" />
+      <div class="card__description">
+        <h2 class="card__title">{{ product.title }}</h2>
+        <div class="card__details">
+          <p class="card__details--price">${{ product.price.toFixed(2) }}</p>
+          <p class="card__details--rating">⭐ {{ product.rating.rate }}</p>
+        </div>
       </div>
-    </div>
-  </router-link>
+    </router-link>
+    <button class="card__addToCart">Add to Cart</button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -31,15 +34,15 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   cursor: pointer;
-  border: 1px solid #ddd;
+  border: 1px solid #000;
   border-radius: 8px;
   overflow: hidden;
   width: 250px;
   background: white;
   transition: all 0.2s ease;
   color: #2d3748;
+  padding: 10px;
 }
 
 .card:hover {
@@ -81,5 +84,15 @@ export default defineComponent({
 .card__details {
   display: flex;
   justify-content: space-between;
+}
+
+.card__addToCart {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
 }
 </style>
