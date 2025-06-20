@@ -25,7 +25,7 @@ const router = createRouter({
     },
     {
       path: "/contact-us",
-      name: "contact-us",
+      name: "contactUs",
       component: ContactUsVue,
     },
     { path: "/:catchAll(.*)*", name: "NotFound", component: NotFound },

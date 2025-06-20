@@ -23,13 +23,21 @@ export default defineComponent({
 
 <template>
   <div class="cart-drawer">
-    <div :class="['cart-drawer__backdrop', { 'cart-drawer__backdrop--show': isOpen }]" @click.self="handleClose">
-      <div :class="['cart-drawer__panel', { 'cart-drawer__panel--open': isOpen }]">
+    <div
+      :class="[
+        'cart-drawer__backdrop',
+        { 'cart-drawer__backdrop--show': isOpen },
+      ]"
+      @click.self="handleClose"
+    >
+      <div
+        :class="['cart-drawer__panel', { 'cart-drawer__panel--open': isOpen }]"
+      >
         <button class="cart-drawer__close-btn" @click="handleClose">
           <XMarkIcon />
         </button>
         <h2>Your Cart</h2>
-        <hr>
+        <hr />
         <p>Your cart is empty</p>
         <p>counter: {{ $store.state.count }}</p>
       </div>

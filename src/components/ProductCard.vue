@@ -1,11 +1,11 @@
 <template>
-    <router-link :to="`/products/${product.id}`" class="card" >
+  <router-link :to="`/products/${product.id}`" class="card">
     <img :src="product.image" :alt="product.title" class="card__image" />
     <div class="card__description">
       <h2 class="card__title">{{ product.title }}</h2>
       <div class="card__details">
         <p class="card__details--price">${{ product.price.toFixed(2) }}</p>
-      <p class="card__details--rating">⭐ {{ product.rating.rate }}</p>
+        <p class="card__details--rating">⭐ {{ product.rating.rate }}</p>
       </div>
     </div>
   </router-link>
@@ -27,7 +27,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.card{
+.card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,8 +52,6 @@ export default defineComponent({
   object-fit: contain;
   border-bottom: #ddd 1px solid;
   padding: 10px;
-
-
 }
 
 .card__description {
@@ -64,11 +62,11 @@ export default defineComponent({
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 2; 
-           line-clamp: 2;
-   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .card__details--price {
@@ -80,7 +78,7 @@ export default defineComponent({
 .card__details--rating {
   color: #ffa500;
 }
-.card__details{
+.card__details {
   display: flex;
   justify-content: space-between;
 }

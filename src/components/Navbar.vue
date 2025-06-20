@@ -3,7 +3,8 @@ import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
 import CartDrawer from "./CartDrawer.vue";
 import Footage from "./FootageSection.vue";
-import Hamburger from "./Hamburger.vue";
+import Hamburger from "./HamburgerMenu.vue";
+import NavLinks from "./NavLinks.vue";
 export default defineComponent({
   name: "Navbar",
   components: {
@@ -11,6 +12,7 @@ export default defineComponent({
     CartDrawer,
     Footage,
     Hamburger,
+    NavLinks,
   },
   data() {
     return {
@@ -44,11 +46,7 @@ export default defineComponent({
         <h3 class="siteHeader__title">Vue Store</h3>
       </RouterLink>
 
-      <nav  :class="[ 'siteHeader__nav', { 'siteHeader__nav--open': isMenuOpen }]">
-        <RouterLink class="siteHeader__link" to="/" @click="closeMenu">Home</RouterLink>
-        <RouterLink class="siteHeader__link" to="/products" @click="closeMenu">Products</RouterLink>
-        <RouterLink class="siteHeader__link" to="/contactUs" @click="closeMenu">Contact Us</RouterLink>
-      </nav>
+      <NavLinks :isMenuOpen="isMenuOpen" @closeHDropdown="closeMenu" />
 
       <Hamburger :isMenuOpen="isMenuOpen" @closeHamburger="toggleMenu" />
 
@@ -84,34 +82,9 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #A1A1A1;
+  background: #a1a1a1;
   width: 100%;
 }
-
-.siteHeader__nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.siteHeader__link.router-link-exact-active {
-  color: white;
-}
-
-.siteHeader__link {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid grey;
-}
-
-.siteHeader__link:first-of-type {
-  border: 0;
-}
-
-.siteHeader__link:hover {
-  background-color: #383333;
-}
-
 
 .site-header__cartbtn {
   background-color: transparent;
@@ -146,33 +119,8 @@ export default defineComponent({
   color: #383333;
 }
 
-@media (max-width: 768px) {
-  .siteHeader__nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #5e5a5a;
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .siteHeader__nav--open {
-    display: flex;
-  }
-
-  .siteHeader__link {
-    padding: 0.5rem 1rem;
-    border-left: none;
-    border-top: 1px solid grey;
-    width: 100%;
-    text-align: center;
-  }
-}
-
 @media (max-width: 480px) {
-.siteHeader__wrapper {
+  .siteHeader__wrapper {
     padding: 0 0.5rem;
   }
 

@@ -20,7 +20,7 @@ export default defineComponent({
               <li>Sitemap</li>
             </ul>
           </div>
-  
+
           <div class="column">
             <h4>Collection</h4>
             <ul>
@@ -30,7 +30,7 @@ export default defineComponent({
               <li>Brands</li>
             </ul>
           </div>
-  
+
           <div class="column">
             <h4>Categories</h4>
             <ul>
@@ -40,9 +40,8 @@ export default defineComponent({
               <li>Sofas</li>
             </ul>
           </div>
-          
         </div>
-  
+
         <!-- Contact Section -->
         <div class="footer-contact">
           <h3>
@@ -50,20 +49,17 @@ export default defineComponent({
             Phoenix, Arizona 85012
           </h3>
           <div class="contact-info">
-          <a href="mailto:asff@fdfsfdc.com">asff@fdfsfdc.com</a><br />
-          <span>+602-926-5809</span>
+            <a href="mailto:asff@fdfsfdc.com">asff@fdfsfdc.com</a><br />
+            <span>+602-926-5809</span>
           </div>
-  
         </div>
       </div>
       <div class="footerContainer__content--copyright">
-        <p >Copyright © All Rights Reserved 2020</p>
+        <p>Copyright © All Rights Reserved 2020</p>
       </div>
     </div>
   </footer>
 </template>
-
-
 
 <style scoped>
 .footer {
@@ -73,16 +69,15 @@ export default defineComponent({
 }
 
 .footerContainer {
-    width: 90%;
+  width: 90%;
   margin: 0 auto;
 }
 
-.footerContainer__content{
+.footerContainer__content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 2rem;
-
 }
 
 .footer-links {
@@ -109,11 +104,9 @@ export default defineComponent({
 }
 
 .footer-contact {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
-
-
 
 .contact-info {
   text-align: right;
@@ -124,8 +117,6 @@ export default defineComponent({
   font-size: 2.4rem;
   font-weight: lighter;
 }
-
-
 
 .footer-contact a {
   color: #2c5ab4;
@@ -139,22 +130,19 @@ export default defineComponent({
     justify-content: center;
   }
 
-
   .footer-links {
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   .footer-contact h3 {
-  text-align: center;
-}
+    text-align: center;
+  }
 
   .footer-contact {
     max-width: 100%;
     align-items: center;
   }
-
 }
 </style>

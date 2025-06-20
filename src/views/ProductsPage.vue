@@ -44,7 +44,7 @@ export default defineComponent({
   margin-top: 2rem;
   align-items: center;
 }
-.loading{
+.loading {
   display: flex;
   height: 50vh;
   justify-content: center;
@@ -52,15 +52,15 @@ export default defineComponent({
   animation-name: spin;
   animation-duration: 5000ms;
   animation-iteration-count: infinite;
-  animation-timing-function: linear; 
+  animation-timing-function: linear;
 }
 
 @keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
