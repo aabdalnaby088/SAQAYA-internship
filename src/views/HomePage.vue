@@ -5,6 +5,7 @@ export default {
 </script>
 
 <template>
+  <!-- Main content of the page -->
   <main class="homePage">
     This is the home page <span class="count">{{ $store.state.count }}</span>
     <br />
@@ -12,6 +13,8 @@ export default {
     <br />
   </main>
 </template>
+
+<!-- Style for the page -->
 
 <style scoped>
 .homePage {

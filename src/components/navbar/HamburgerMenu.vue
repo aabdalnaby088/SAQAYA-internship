@@ -5,12 +5,14 @@ export default defineComponent({
   name: "HamburgerMenu",
   props: {
     isMenuOpen: {
+      // Prop for the hamburger menu state
       type: Boolean,
       required: true,
     },
   },
   methods: {
     handleClose() {
+      // Method emit from the component to parent for close the hamburger menu
       this.$emit("closeHamburger");
     },
   },
@@ -18,6 +20,7 @@ export default defineComponent({
 </script>
 
 <template>
+  <!-- Main content of the hamburger menu -->
   <button class="hamburger" @click="handleClose" :menuOpened="isMenuOpen">
     <span class="hamburger__bar"></span>
     <span class="hamburger__bar"></span>
@@ -25,6 +28,7 @@ export default defineComponent({
   </button>
 </template>
 
+<!-- Style for the page -->
 <style scoped>
 .hamburger {
   display: none;

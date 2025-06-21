@@ -1,3 +1,5 @@
+<!-- FootageSection.vue is a reusable component for displaying the footer section of the page. -->
+
 <script lang="ts">
 import { defineComponent } from "vue";
 
@@ -7,9 +9,13 @@ export default defineComponent({
 </script>
 
 <template>
+  <!-- Main content of the footer -->
   <footer class="footer">
+    <!-- Footer container -->
     <div class="footerContainer">
+      <!-- Footer container content -->
       <div class="footerContainer__content">
+        <!-- Footer links -->
         <div class="footer-links">
           <div class="column">
             <h4>Navigate</h4>
@@ -60,6 +66,8 @@ export default defineComponent({
     </div>
   </footer>
 </template>
+
+<!-- Style for the page -->
 
 <style scoped>
 .footer {

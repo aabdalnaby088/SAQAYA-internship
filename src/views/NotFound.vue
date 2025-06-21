@@ -1,10 +1,14 @@
+<!-- NotFound.vue displays a 404 page when the user visits a non-existent page. -->
 <template>
+  <!-- Page content -->
   <div class="notFound">
+    <!-- Page title and description -->
     <img :src="Notfound" alt="Page not found" class="notFound__svg" />
     <h1 class="notFound__title">Oops! Page Not Found</h1>
     <p class="notFound__description">
       Sorry, the page you're looking for doesn't exist.
     </p>
+    <!-- Back to home button -->
     <RouterLink to="/" class="notFound__btn">Back to Home</RouterLink>
   </div>
 </template>
@@ -16,12 +20,13 @@ export default {
   name: "NotFound",
   data() {
     return {
-      Notfound,
+      Notfound, // Import the Notfound image
     };
   },
 };
 </script>
 
+<!-- Style for the page -->
 <style scoped>
 .notFound {
   display: flex;

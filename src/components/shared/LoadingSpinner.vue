@@ -1,3 +1,11 @@
+<!-- LoadingSpinner.vue is a reusable component for displaying a loading spinner. It includes an image of a loading spinner. -->
+<template>
+  <div class="loading">
+    <!-- Loading spinner image -->
+    <img src="../../assets/loading.png" alt="loading" />
+  </div>
+</template>
+
 <script lang="ts">
 import { defineComponent } from "vue";
 
@@ -6,12 +14,7 @@ export default defineComponent({
 });
 </script>
 
-<template>
-  <div class="loading">
-    <img src="../../assets/loading.png" alt="loading" />
-  </div>
-</template>
-
+<!-- Style for the page -->
 <style scoped>
 .loading {
   display: flex;
