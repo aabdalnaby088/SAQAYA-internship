@@ -35,7 +35,6 @@ export default defineComponent({
   // Fetch the products when the component is created
   created() {
     this.fetchProducts();
-    console.log(this.error);
   },
   // get the Featchproducts function from the vuex store
   methods: {

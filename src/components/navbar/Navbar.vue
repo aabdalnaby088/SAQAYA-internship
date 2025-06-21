@@ -7,6 +7,7 @@ import CartDrawer from "../CartDrawer.vue";
 import Footage from "../FootageSection.vue";
 import Hamburger from "./HamburgerMenu.vue";
 import NavLinks from "./NavLinks.vue";
+import { mapGetters } from "vuex";
 export default defineComponent({
   name: "Navbar",
   components: {
@@ -38,6 +39,10 @@ export default defineComponent({
       this.isCartOpen = !this.isCartOpen;
     },
   },
+  computed: {
+    // Computed property for cart count
+    ...mapGetters("cart", ["cartCount"]),
+  },
 });
 </script>
 
@@ -55,7 +60,7 @@ export default defineComponent({
       <!-- Cart drawer button -->
       <button class="site-header__cartbtn" @click="toggleCart">
         <ShoppingCartIcon class="site-header__cartIcon" />
-        <!-- <span class="site-header__cartCount">{{ cartCount }}</span> -->
+        <span class="site-header__cartCount">{{ cartCount }}</span>
       </button>
       <!-- Cart drawer component -->
       <!-- teleport to body to make it direct child for the body in dom tree -->
