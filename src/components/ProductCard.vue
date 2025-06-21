@@ -1,7 +1,13 @@
+<!-- ProductCard.vue is a reusable component for displaying a product card. It includes the product image, title, price, and rating. -->
+
 <template>
+  <!-- Main content of the card -->
   <div class="card">
+    <!-- Product image and link -->
     <router-link :to="`/products/${product.id}`" class="card__Content">
+      <!-- Product image -->
       <img :src="product.image" :alt="product.title" class="card__image" />
+      <!-- Product details -->
       <div class="card__description">
         <h2 class="card__title">{{ product.title }}</h2>
         <div class="card__details">
@@ -10,6 +16,7 @@
         </div>
       </div>
     </router-link>
+    <!-- Add to cart button -->
     <button class="card__addToCart">Add to Cart</button>
   </div>
 </template>
@@ -22,13 +29,15 @@ export default defineComponent({
   name: "ProductCard",
   props: {
     product: {
-      type: Object as PropType<Product>,
+      //  Product data prop
+      type: Object as PropType<Product>, //  PropType for product data
       required: true,
     },
   },
 });
 </script>
 
+<!-- Style for the page -->
 <style scoped>
 .card {
   display: flex;

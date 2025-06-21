@@ -1,23 +1,7 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "NavLinks",
-  props: {
-    isMenuOpen: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  methods: {
-    closeMenu() {
-      this.$emit("closeHDropdown");
-    },
-  },
-});
-</script>
+<!-- NavLinks.vue is a reusable component for displaying a navigation links. It includes a home link, products link, and contact us link. -->
 
 <template>
+  <!-- Main content of the navigation links -->
   <nav :class="['navLinks', { 'navLinks--open': isMenuOpen }]">
     <RouterLink class="navLink__item" to="/" @click="closeMenu"
       >Home</RouterLink
@@ -31,6 +15,27 @@ export default defineComponent({
   </nav>
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "NavLinks",
+  props: {
+    isMenuOpen: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  methods: {
+    closeMenu() {
+      // Method emit from the component to parent for close the navigation links dropdown
+      this.$emit("closeHDropdown");
+    },
+  },
+});
+</script>
+
+<!-- Style for the page -->
 <style scoped>
 .navLinks {
   display: flex;

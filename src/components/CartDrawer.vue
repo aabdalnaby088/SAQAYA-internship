@@ -1,28 +1,9 @@
-<script lang="ts">
-import { XMarkIcon } from "@heroicons/vue/24/solid";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "CartDrawer",
-  props: {
-    isOpen: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  components: {
-    XMarkIcon,
-  },
-  methods: {
-    handleClose() {
-      this.$emit("close");
-    },
-  },
-});
-</script>
+<!-- CartDrawer.vue is a reusable component for displaying a cart drawer. It includes a close button and a title. -->
 
 <template>
+  <!-- Main content of the cart drawer -->
   <div class="cart-drawer">
+    <!-- Cart drawer backdrop -->
     <div
       :class="[
         'cart-drawer__backdrop',
@@ -30,9 +11,11 @@ export default defineComponent({
       ]"
       @click.self="handleClose"
     >
+      <!-- Cart drawer panel the content of the cart drawer -->
       <div
         :class="['cart-drawer__panel', { 'cart-drawer__panel--open': isOpen }]"
       >
+        <!-- Cart drawer close button -->
         <button class="cart-drawer__close-btn" @click="handleClose">
           <XMarkIcon />
         </button>
@@ -43,6 +26,33 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { XMarkIcon } from "@heroicons/vue/24/solid";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "CartDrawer",
+  props: {
+    isOpen: {
+      // Prop for the cart drawer state
+      type: Boolean,
+      required: true,
+    },
+  },
+  components: {
+    XMarkIcon,
+  },
+  methods: {
+    // Methods emit from the component to parent for close the cart drawer
+    handleClose() {
+      this.$emit("close");
+    },
+  },
+});
+</script>
+
+<!-- Style for the page -->
 
 <style scoped>
 .cart-drawer {

@@ -1,5 +1,6 @@
 import type { Product } from "../types/product";
 
+//  base function get products from server
 async function getProducts(): Promise<Product[]> {
   try {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -10,6 +11,7 @@ async function getProducts(): Promise<Product[]> {
   }
 }
 
+//  base function get product details from server
 async function getProduct(id: number): Promise<Product> {
   try {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`);

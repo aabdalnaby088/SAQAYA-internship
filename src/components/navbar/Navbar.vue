@@ -1,3 +1,5 @@
+<!-- Navbar.vue is a reusable component for displaying the navigation bar of the page. It includes a hamburger menu, navigation links, and cart drawer. -->
+
 <script lang="ts">
 import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
@@ -8,6 +10,7 @@ import NavLinks from "./NavLinks.vue";
 export default defineComponent({
   name: "Navbar",
   components: {
+    // Import the components for the navigation bar
     ShoppingCartIcon,
     CartDrawer,
     Footage,
@@ -16,23 +19,22 @@ export default defineComponent({
   },
   data() {
     return {
-      isMenuOpen: false as boolean,
-      isCartOpen: false as boolean,
+      isMenuOpen: false as boolean, // Initialize the menu state
+      isCartOpen: false as boolean, // Initialize the cart drawer state
     };
   },
-  computed: {
-    cartCount() {
-      return this.$store.state.count;
-    },
-  },
+
   methods: {
     toggleMenu() {
+      // Method  for toggle the menu
       this.isMenuOpen = !this.isMenuOpen;
     },
     closeMenu() {
+      // Method  for close the menu
       this.isMenuOpen = false;
     },
     toggleCart() {
+      // Method  for toggle the cart drawer
       this.isCartOpen = !this.isCartOpen;
     },
   },
@@ -40,21 +42,23 @@ export default defineComponent({
 </script>
 
 <template>
+  <!-- Main content of the navigation bar -->
   <header class="siteHeader">
     <div class="siteHeader__wrapper">
       <RouterLink to="/">
         <h3 class="siteHeader__title">Vue Store</h3>
       </RouterLink>
-
+      <!-- Navigation links  component -->
       <NavLinks :isMenuOpen="isMenuOpen" @closeHDropdown="closeMenu" />
-
+      <!-- Hamburger menu component -->
       <Hamburger :isMenuOpen="isMenuOpen" @closeHamburger="toggleMenu" />
-
+      <!-- Cart drawer button -->
       <button class="site-header__cartbtn" @click="toggleCart">
         <ShoppingCartIcon class="site-header__cartIcon" />
         <!-- <span class="site-header__cartCount">{{ cartCount }}</span> -->
       </button>
-
+      <!-- Cart drawer component -->
+      <!-- teleport to body to make it direct child for the body in dom tree -->
       <teleport to="body">
         <CartDrawer :is-open="isCartOpen" @close="toggleCart" />
       </teleport>
@@ -62,6 +66,7 @@ export default defineComponent({
   </header>
 </template>
 
+<!-- Style for the page -->
 <style scoped>
 .siteHeader {
   position: fixed;
