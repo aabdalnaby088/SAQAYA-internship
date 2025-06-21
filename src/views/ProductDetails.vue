@@ -16,6 +16,23 @@
       <p class="productDetails__rating">⭐ {{ product?.rating.rate }}</p>
       <p class="productDetails__price">$ {{ product?.price.toFixed(2) }}</p>
       <p class="productDetails__description">{{ product?.description }}</p>
+      <!-- Add to cart button -->
+      <button
+        class="card__addToCart"
+        @click="handleAddToCart"
+        :inCart="isInCart"
+        v-show="!isInCart"
+      >
+        {{ isInCart ? "Added to cart" : "Add to Cart" }}
+      </button>
+      <button
+        class="card__RemoveFromCart"
+        @click="handleRemoveFromCart"
+        :inCart="isInCart"
+        v-show="isInCart"
+      >
+        Remove from cart
+      </button>
     </div>
   </div>
 
@@ -27,6 +44,7 @@ import { defineComponent } from "vue";
 import { type Product } from "../types/product";
 import { getProduct } from "../services/productsService";
 import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
+import { mapActions, mapGetters } from "vuex";
 export default defineComponent({
   name: "ProductDetails",
   components: {
@@ -59,8 +77,26 @@ export default defineComponent({
     } else {
       this.product = product;
       // Set the document title to the product title for better SEO
-      document.title = this.product?.title || 'Product Details';
+      document.title = this.product?.title || "Product Details";
     }
+  },
+  methods: {
+    ...mapActions("cart", ["addItem", "removeItem"]),
+    handleAddToCart() {
+      // Call the addItem mutation from the vuex store
+      this.addItem(this.product);
+    },
+
+    handleRemoveFromCart() {
+      // Call the removeItem mutation from the vuex store
+      this.removeItem(this.product);
+    },
+  },
+  computed: {
+    ...mapGetters("cart", ["itemInCart"]),
+    isInCart() {
+      return this.itemInCart(this.product);
+    },
   },
 });
 </script>
@@ -101,6 +137,26 @@ export default defineComponent({
 .productDetails__description {
   color: #555;
   line-height: 1.6;
+}
+
+.card__addToCart {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.card__RemoveFromCart {
+  background-color: #a1a1a1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

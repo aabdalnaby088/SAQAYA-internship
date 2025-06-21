@@ -17,13 +17,29 @@
       </div>
     </router-link>
     <!-- Add to cart button -->
-    <button class="card__addToCart">Add to Cart</button>
+    <button
+      class="card__addToCart"
+      @click="handleAddToCart"
+      :inCart="isInCart"
+      v-show="!isInCart"
+    >
+      {{ isInCart ? "Added to cart" : "Add to Cart" }}
+    </button>
+    <button
+      class="card__RemoveFromCart"
+      @click="handleRemoveFromCart"
+      :inCart="isInCart"
+      v-show="isInCart"
+    >
+      Remove from cart
+    </button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import { type Product } from "../types/product";
+import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
   name: "ProductCard",
@@ -32,6 +48,25 @@ export default defineComponent({
       //  Product data prop
       type: Object as PropType<Product>, //  PropType for product data
       required: true,
+    },
+  },
+  methods: {
+    // Add explicit signature for TypeScript
+    ...mapActions("cart", ["addItem", "removeItem"]),
+    handleAddToCart() {
+      // Call the addItem mutation from the vuex store
+      this.addItem(this.product);
+    },
+
+    handleRemoveFromCart() {
+      // Call the removeItem mutation from the vuex store
+      this.removeItem(this.product);
+    },
+  },
+  computed: {
+    ...mapGetters("cart", ["itemInCart"]),
+    isInCart() {
+      return this.itemInCart(this.product);
     },
   },
 });
@@ -43,7 +78,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: pointer;
   border: 1px solid #000;
   border-radius: 8px;
   overflow: hidden;
@@ -52,6 +86,10 @@ export default defineComponent({
   transition: all 0.2s ease;
   color: #2d3748;
   padding: 10px;
+}
+
+.card__Content {
+  cursor: pointer;
 }
 
 .card:hover {
@@ -103,5 +141,15 @@ export default defineComponent({
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+}
+
+.card__RemoveFromCart {
+  background-color: #a1a1a1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
 }
 </style>
