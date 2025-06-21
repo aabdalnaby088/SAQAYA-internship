@@ -21,7 +21,22 @@
         </button>
         <h2>Your Cart</h2>
         <hr />
-        <p>Your cart is empty</p>
+        <p v-if="cartCount === 0">Your cart is empty</p>
+        <p v-else>
+          Your cart contains {{ cartCount }} items for a total of ${{
+            cartTotal
+          }}
+        </p>
+        <div>
+          <CartItem v-for="item in items" :item="item" />
+        </div>
+        <button
+          v-show="cartCount > 0"
+          class="cart-drawer__clear-btn"
+          @click="clear"
+        >
+          Clear Cart
+        </button>
       </div>
     </div>
   </div>
@@ -30,6 +45,8 @@
 <script lang="ts">
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
+import { mapGetters, mapState, mapActions } from "vuex";
+import CartItem from "./CartItem.vue";
 
 export default defineComponent({
   name: "CartDrawer",
@@ -42,12 +59,23 @@ export default defineComponent({
   },
   components: {
     XMarkIcon,
+    CartItem,
   },
   methods: {
+    // method cleare cart from vuex cart slice
+    ...mapActions("cart", ["clearCart"]),
+    clear() {
+      this.clearCart();
+    },
     // Methods emit from the component to parent for close the cart drawer
     handleClose() {
       this.$emit("close");
     },
+  },
+
+  computed: {
+    ...mapGetters("cart", ["cartCount", "cartTotal"]),
+    ...mapState("cart", ["items"]),
   },
 });
 </script>
@@ -94,8 +122,8 @@ export default defineComponent({
   transform: translateX(0);
 }
 .cart-drawer__close-btn {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -103,5 +131,16 @@ export default defineComponent({
   background: transparent;
   color: white;
   cursor: pointer;
+}
+
+.cart-drawer__clear-btn {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border: none;
+  background-color: #a1a1a1;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 1rem 0;
 }
 </style>
