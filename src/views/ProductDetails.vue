@@ -58,6 +58,8 @@ export default defineComponent({
       this.$router.push({ name: "NotFound" });
     } else {
       this.product = product;
+      // Set the document title to the product title for better SEO
+      document.title = this.product?.title || 'Product Details';
     }
   },
 });
