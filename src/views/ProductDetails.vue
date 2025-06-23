@@ -5,17 +5,23 @@
   <div class="productDetails" v-show="!isLoading">
     <!-- Product image -->
     <img
-      :src="product?.image"
-      :alt="product?.title"
+      :src="selectedProduct?.image"
+      :alt="selectedProduct?.title"
       class="productDetails__image"
     />
     <!-- Product details -->
     <div class="productDetails__info">
-      <h1>{{ product?.title }}</h1>
+      <h1>{{ selectedProduct?.title }}</h1>
       <!-- Product rating, price, and description -->
-      <p class="productDetails__rating">⭐ {{ product?.rating.rate }}</p>
-      <p class="productDetails__price">$ {{ product?.price.toFixed(2) }}</p>
-      <p class="productDetails__description">{{ product?.description }}</p>
+      <p class="productDetails__rating">
+        ⭐ {{ selectedProduct?.rating.rate }}
+      </p>
+      <p class="productDetails__price">
+        $ {{ selectedProduct?.price.toFixed(2) }}
+      </p>
+      <p class="productDetails__description">
+        {{ selectedProduct?.description }}
+      </p>
       <!-- Add to cart button -->
       <button
         class="card__addToCart"
@@ -41,10 +47,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { type Product } from "../types/product";
-import { getProduct } from "../services/productsService";
 import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default defineComponent({
   name: "ProductDetails",
   components: {
@@ -57,45 +61,33 @@ export default defineComponent({
       required: true,
     },
   },
-  data() {
-    return {
-      product: undefined as Product | undefined, // Initialize the product data
-      isLoading: false, // Initialize the loading state
-    };
-  },
   // Fetch the product data when the component is created
-  async created() {
-    // Set the loading state to true
-    this.isLoading = true;
-    // Fetch the product data from the server
-    const product = await getProduct(parseInt(this.id));
-    // Set the loading state to false
-    this.isLoading = false;
-    // Check if the product exists
-    if (!product) {
-      this.$router.push({ name: "NotFound" });
-    } else {
-      this.product = product;
-      // Set the document title to the product title for better SEO
-      document.title = this.product?.title || "Product Details";
-    }
+  created() {
+    this.getSelectedProduct(this.id);
   },
   methods: {
+    // Call the addItem mutation from the vuex store cart slice
     ...mapActions("cart", ["addItem", "removeItem"]),
+    // Call the getSelectedProduct action from the vuex store selectedProduct slice
+    ...mapActions("selectedProduct", ["getSelectedProduct"]),
+
     handleAddToCart() {
       // Call the addItem mutation from the vuex store
-      this.addItem(this.product);
+      this.addItem(this.selectedProduct);
     },
 
     handleRemoveFromCart() {
       // Call the removeItem mutation from the vuex store
-      this.removeItem(this.product);
+      this.removeItem(this.selectedProduct);
     },
   },
   computed: {
+    // Computed property for cart count from vuex cart slice
     ...mapGetters("cart", ["itemInCart"]),
+    // Computed property for selectedProduct from vuex selectedProduct slice
+    ...mapState("selectedProduct", ["selectedProduct", "isLoading"]),
     isInCart() {
-      return this.itemInCart(this.product);
+      return this.itemInCart(this.selectedProduct);
     },
   },
 });
