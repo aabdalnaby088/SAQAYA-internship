@@ -35,10 +35,9 @@ export default {
 </script>
 
 <style scoped>
-.dropdown__sort{
-    border: none;
-    padding: 0.65rem;
-    border-radius: 5px;
+.dropdown__sort {
+  border: none;
+  padding: 0.65rem;
+  border-radius: 5px;
 }
-
 </style>
