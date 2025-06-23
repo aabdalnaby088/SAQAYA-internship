@@ -6,7 +6,9 @@ import type { RootState } from "../index";
 //  type ProductsState for products data
 export interface ProductsState {
   items: Product[];
+  initialItems: Product[];
   loading: boolean;
+  sort: string;
   error: string | null;
 }
 
@@ -20,6 +22,8 @@ const products = {
   //  initial state for products data
   state: () => ({
     items: [],
+    initialItems: [],
+    sort: "default",
     loading: false,
   }),
   //  mutations for products data
@@ -31,10 +35,29 @@ const products = {
     //  setProducts mutation for products state
     setProducts(state: ProductsState, products: Product[]) {
       state.items = products;
+      state.initialItems = [...products];
     },
     //  setError mutation for error state
     setError(state: ProductsState, error: string | null) {
       state.error = error;
+    },
+    //  setSort mutation for sort state
+    setSort(state: ProductsState, sort: string) {
+      state.sort = sort;
+      switch (sort) {
+        case "asc":
+          state.items.sort((a, b) => a.price - b.price);
+          break;
+        case "desc":
+          state.items.sort((a, b) => b.price - a.price);
+          break;
+        case "rating":
+          state.items.sort((a, b) => b.rating.rate - a.rating.rate);
+          break;
+        default:
+          state.items = [...state.initialItems];
+          break;
+      }
     },
   },
 

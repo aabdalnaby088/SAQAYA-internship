@@ -1,33 +1,31 @@
-import { mount } from '@vue/test-utils';
-import { describe, it, expect } from 'vitest';
-import NavLinks from '../navbar/NavLinks.vue';
+import { mount } from "@vue/test-utils";
+import { describe, it, expect } from "vitest";
+import NavLinks from "../navbar/NavLinks.vue";
 
 const RouterLinkStub = {
-  name: 'RouterLink',
-  props: ['to'],
+  name: "RouterLink",
+  props: ["to"],
   template: `<a :href="to"><slot /></a>`,
 };
 
-describe('NavLinks.vue', () => {
-it('emits "closeHDropdown" when a RouterLink is clicked', async () => {
+describe("NavLinks.vue", () => {
+  it('emits "closeHDropdown" when a RouterLink is clicked', async () => {
     const wrapper = mount(NavLinks, {
       props: {
         isMenuOpen: true,
       },
       global: {
-        stubs: ['RouterLink'],
+        stubs: ["RouterLink"],
       },
     });
 
-    const links = wrapper.findAllComponents({ name: 'RouterLink' });
+    const links = wrapper.findAllComponents({ name: "RouterLink" });
     expect(links).toHaveLength(3);
 
-    await links[0].trigger('click');
+    await links[0].trigger("click");
 
-    expect(wrapper.emitted('closeHDropdown')).to
+    expect(wrapper.emitted("closeHDropdown")).to;
   });
-
-
 
   it('renders correct "href" paths', () => {
     const wrapper = mount(NavLinks, {
@@ -41,10 +39,10 @@ it('emits "closeHDropdown" when a RouterLink is clicked', async () => {
       },
     });
 
-    const links = wrapper.findAll('a');
+    const links = wrapper.findAll("a");
 
-    expect(links[0].attributes('href')).toBe('/');
-    expect(links[1].attributes('href')).toBe('/products');
-    expect(links[2].attributes('href')).toBe('/contactUs');
+    expect(links[0].attributes("href")).toBe("/");
+    expect(links[1].attributes("href")).toBe("/products");
+    expect(links[2].attributes("href")).toBe("/contactUs");
   });
 });
