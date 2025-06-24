@@ -4,7 +4,7 @@ type rate = {
   count: number;
 };
 
-//  type Product for products data
+//  type Product for products data we get from server
 export interface Product {
   id: number;
   title: string;
@@ -14,6 +14,7 @@ export interface Product {
   rating: rate;
 }
 
+//  type StoredCartItem for cart items stored in local storage
 export interface StoredCartItem {
   id: number;
   quantity: number;

@@ -64,7 +64,6 @@ export default defineComponent({
   // Fetch the product data when the component is created
   created() {
     this.getSelectedProduct(this.id);
-
   },
   methods: {
     // Call the addItem mutation from the vuex store cart slice
@@ -88,7 +87,6 @@ export default defineComponent({
     // Computed property for selectedProduct from vuex selectedProduct slice
     ...mapState("selectedProduct", ["selectedProduct", "isLoading"]),
 
-
     isInCart() {
       return this.itemInCart(this.selectedProduct);
     },
@@ -96,13 +94,12 @@ export default defineComponent({
 
   // Watch for changes in the selectedProduct property and update the document title
   watch: {
-    selectedProduct(newProduct){
+    selectedProduct(newProduct) {
       if (newProduct?.title) {
-      document.title = `${newProduct.title} | Vue Store`;
-    }
-
-    }
-  }
+        document.title = `${newProduct.title} | Vue Store`;
+      }
+    },
+  },
 });
 </script>
 

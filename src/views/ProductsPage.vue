@@ -41,10 +41,9 @@ export default defineComponent({
   },
   // Computed properties for the products state from vuex
   computed: {
-    ...mapState("products",["items","loading", "error"]), 
+    ...mapState("products", ["items", "loading", "error"]),
   },
   // Fetch the products when the component is created
-
 });
 </script>
 

@@ -29,10 +29,9 @@ export default defineComponent({
   computed: {
     // Computed property for products from vuex products slice
     ...mapState("products", ["items"]),
-    
   },
-  // Fetch the products when the component is created
-    async created() {
+  // fetch products from server when the component is created
+  async created() {
     await this.fetchProducts();
     await this.initializeCart();
   },

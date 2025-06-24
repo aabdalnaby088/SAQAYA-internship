@@ -19,7 +19,7 @@ const selectedProduct = {
     selectedProduct: null,
     isLoading: false,
   }),
-  //  mutations for set selectedProduct data 
+  //  mutations for set selectedProduct data
   mutations: {
     setSelectedProduct(state: productDetails, product: Product) {
       state.selectedProduct = product;
