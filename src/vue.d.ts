@@ -1,4 +1,5 @@
 declare module "vuex";
+
 declare module "*.vue";
 {
   import { DefineComponent } from "vue";

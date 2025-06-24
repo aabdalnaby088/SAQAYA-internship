@@ -21,7 +21,7 @@ const products = {
 
   //  initial state for products data
   state: () => ({
-    items: [],
+    items: [] ,
     initialItems: [],
     sort: "default",
     loading: false,

@@ -10,7 +10,7 @@
     <div class="productsPage__productsContainer" v-show="!loading">
       <!-- Product card component rendered for each product -->
       <ProductCard
-        v-for="product in items"
+        v-for="product in items as Product[]"
         :key="product.id"
         :product="product"
       />
@@ -26,9 +26,11 @@
 import { defineComponent } from "vue";
 import ProductCard from "../components/ProductCard.vue";
 import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import SortDropdown from "../components/SortDropdown.vue";
-import type { Product } from "@/types/product";
+import type { ProductsState } from "../store/modules/products";
+import type { Product } from "../types/product";
+
 export default defineComponent({
   name: "ProductList",
   // Import the ProductCard and LoadingSpinner components
@@ -39,16 +41,10 @@ export default defineComponent({
   },
   // Computed properties for the products state from vuex
   computed: {
-    ...mapState("products", ["items", "loading", "error"]),
+    ...mapState("products",["items","loading", "error"]), 
   },
   // Fetch the products when the component is created
-  created() {
-    this.fetchProducts();
-  },
-  // get the Featchproducts function from the vuex store
-  methods: {
-    ...mapActions("products", ["fetchProducts"]),
-  },
+
 });
 </script>
 

@@ -1,19 +1,12 @@
-import type { CartState } from "../store/modules/cart";
+import type { Product, StoredCartItem } from "../types/product";
 
-function getCart(): CartState["items"] {
-  const items = localStorage.getItem("cart");
-  if (items) {
-    try {
-      return JSON.parse(items);
-    } catch {
-      localStorage.removeItem("cart");
-    }
-  }
-  return [];
+
+export function getCart(): StoredCartItem[] {
+  const data = localStorage.getItem("cart");
+  
+  return data ? JSON.parse(data) : [];
 }
 
-function saveCart(items: CartState["items"]) {
+export function saveCart(items: StoredCartItem[]) {
   localStorage.setItem("cart", JSON.stringify(items));
 }
-
-export { getCart, saveCart };
