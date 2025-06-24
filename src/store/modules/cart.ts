@@ -20,15 +20,21 @@ const cart = {
   namespaced: true,
 
   state: (): CartState => ({
-    items: getCart(),
+    items:[] as CartState["items"],
     error: null,
   }),
 
   mutations: {
     setItems(state: CartState, items: CartState["items"]) {
-      state.items = items;
-      saveCart(items);
-    },
+        state.items = items;
+
+        const toStore = items.map((i) => ({
+          id: i.product.id,
+          quantity: i.quantity,
+        }));
+        saveCart(toStore);
+      },
+      
     setError(state: CartState, error: string | null) {
       state.error = error;
     },
@@ -75,6 +81,17 @@ const cart = {
     setError({ commit }: CartContext, error: string | null) {
       commit("setError", error);
     },
+  initializeCart({ commit, rootState }: CartContext) {
+  const stored = getCart(); // [{ id, quantity }]
+  const fullItems = stored
+    .map(({ id, quantity }) => {
+      const product = rootState.products.items.find((p) => p.id === id);
+      return product ? { product, quantity } : null;
+    })
+    .filter(Boolean) as CartState["items"];
+
+  commit("setItems", fullItems);
+}
   },
 
   getters: {

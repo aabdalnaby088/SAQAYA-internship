@@ -24,7 +24,7 @@
         <p v-if="cartCount === 0">Your cart is empty</p>
         <p v-else>
           Your cart contains {{ cartCount }} items for a total of ${{
-            cartTotal
+            cartTotal.toFixed(2)
           }}
         </p>
         <div>

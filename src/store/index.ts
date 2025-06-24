@@ -6,7 +6,7 @@ import selectedProduct from "./modules/selectedProduct";
 
 //  RootState for vuex store state
 export interface RootState {
-  products: ProductsState;
+  products: ProductsState ;
   cart: CartState;
   selectedProduct: Product;
 }
@@ -14,7 +14,7 @@ export interface RootState {
 //  create vuex store
 export default createStore({
   modules: {
-    products, // products module
+    products , // products module
     cart, // cart module
     selectedProduct, // selectedProduct module
   },

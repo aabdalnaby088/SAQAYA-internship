@@ -17,6 +17,7 @@
 import { defineComponent } from "vue";
 import Footage from "../components/FootageSection.vue";
 import Navbar from "../components/navbar/Navbar.vue";
+import { mapActions, mapState } from "vuex";
 
 export default defineComponent({
   name: "MainLayout",
@@ -24,6 +25,21 @@ export default defineComponent({
   components: {
     Navbar,
     Footage,
+  },
+  computed: {
+    // Computed property for products from vuex products slice
+    ...mapState("products", ["items"]),
+    
+  },
+  // Fetch the products when the component is created
+    async created() {
+    await this.fetchProducts();
+    await this.initializeCart();
+  },
+  // get the Featchproducts function from the vuex store
+  methods: {
+    ...mapActions("products", ["fetchProducts"]),
+    ...mapActions("cart", ["initializeCart"]),
   },
 });
 </script>

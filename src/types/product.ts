@@ -13,3 +13,8 @@ export interface Product {
   description: string;
   rating: rate;
 }
+
+export interface StoredCartItem {
+  id: number;
+  quantity: number;
+}
