@@ -33,7 +33,6 @@ const selectedProduct = {
   actions: {
     //  getSelectedProduct action for fetching selectedProduct
     async getSelectedProduct({ commit }: productContext, id: string) {
-      console.log(id);
 
       commit("setLoading", true);
       const product = await getProduct(parseInt(id));
