@@ -82,6 +82,10 @@ const products = {
         commit("setLoading", false);
       }
     },
+    //  setSort action for setting sort
+    setSort({ commit }: ProductsContext, sort: string) {
+      commit("setSort", sort);
+    },
   },
 };
 

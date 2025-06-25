@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "SortDropdown",
@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("products", ["setSort"]),
+    ...mapActions("products", ["setSort"]),
     handleSort() {
       this.setSort(this.sort);
     },
