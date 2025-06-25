@@ -1,8 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
 import FootageSection from "@/components/FootageSection.vue";
-
-describe("FootageSection.vue", () => {
+describe("testing footer component", () => {
   it("renders footer container", () => {
     const wrapper = mount(FootageSection);
     expect(wrapper.find("footer").exists()).toBe(true);

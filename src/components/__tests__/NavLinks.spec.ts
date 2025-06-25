@@ -24,7 +24,7 @@ describe("NavLinks.vue", () => {
 
     await links[0].trigger("click");
 
-    expect(wrapper.emitted("closeHDropdown")).to;
+    expect(wrapper.emitted("closeHDropdown")).toBeTruthy();
   });
 
   it('renders correct "href" paths', () => {
