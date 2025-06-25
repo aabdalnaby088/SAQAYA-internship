@@ -32,8 +32,8 @@ export default defineComponent({
   },
   // fetch products from server when the component is created
   async created() {
-    await this.fetchProducts();
     await this.initializeCart();
+    await this.fetchProducts();
   },
   // get the Featchproducts function from the vuex store
   methods: {
