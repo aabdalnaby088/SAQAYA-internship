@@ -3,36 +3,44 @@
 <template>
   <!-- Main content of the navigation links -->
   <nav :class="['navLinks', { 'navLinks--open': isMenuOpen }]">
-    <RouterLink class="navLink__item" to="/" @click="closeMenu"
+    <RouterLink class="navLink__item" to="/" @click="handleClose"
       >Home</RouterLink
     >
-    <RouterLink class="navLink__item" to="/products" @click="closeMenu"
+    <RouterLink class="navLink__item" to="/products" @click="handleClose"
       >Products</RouterLink
     >
-    <RouterLink class="navLink__item" to="/contactUs" @click="closeMenu"
+    <RouterLink class="navLink__item" to="/contactUs" @click="handleClose"
       >Contact Us</RouterLink
     >
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+const props = defineProps<{
+  isMenuOpen: boolean;
+}>();
 
-export default defineComponent({
-  name: "NavLinks",
-  props: {
-    isMenuOpen: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  methods: {
-    closeMenu() {
-      // Method emit from the component to parent for close the navigation links dropdown
-      this.$emit("closeHDropdown");
-    },
-  },
-});
+const emit = defineEmits<{
+  (e: "closeDropdown"): void;
+}>();
+
+function handleClose() {
+  // Method emit from the component to parent for close the navigation links dropdown
+  emit("closeDropdown");
+}
+
+// props: {
+//   isMenuOpen: {
+//     type: Boolean,
+//     required: true,
+//   },
+// },
+// methods: {
+//   closeMenu() {
+//     // Method emit from the component to parent for close the navigation links dropdown
+//     this.$emit("closeHDropdown");
+//   },
+// },
 </script>
 
 <!-- Style for the page -->

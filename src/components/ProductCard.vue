@@ -9,7 +9,9 @@
       <img :src="product.image" :alt="product.title" class="card__image" />
       <!-- Product details -->
       <div class="card__description">
+        <!-- Product title -->
         <h2 class="card__title">{{ product.title }}</h2>
+        <!-- Product rating and price -->
         <div class="card__details">
           <p class="card__details--price">${{ product.price.toFixed(2) }}</p>
           <p class="card__details--rating">⭐ {{ product.rating.rate }}</p>
@@ -25,6 +27,7 @@
     >
       {{ isInCart ? "Added to cart" : "Add to Cart" }}
     </button>
+    <!-- Remove from cart button -->
     <button
       class="card__RemoveFromCart"
       @click="handleRemoveFromCart"
@@ -36,40 +39,34 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
+import { useCartStore } from "../store";
 import { type Product } from "../types/product";
-import { mapActions, mapGetters } from "vuex";
 
-export default defineComponent({
-  name: "ProductCard",
-  props: {
-    product: {
-      //  Product data prop
-      type: Object as PropType<Product>, //  PropType for product data
-      required: true,
-    },
-  },
-  methods: {
-    // Add explicit signature for TypeScript
-    ...mapActions("cart", ["addItem", "removeItem"]),
-    handleAddToCart() {
-      // Call the addItem mutation from the vuex store
-      this.addItem(this.product);
-    },
+// defining props for the component
+const props = defineProps<{
+  product: Product;
+}>();
 
-    handleRemoveFromCart() {
-      // Call the removeItem mutation from the vuex store
-      this.removeItem(this.product);
-    },
-  },
-  computed: {
-    ...mapGetters("cart", ["itemInCart"]),
-    isInCart() {
-      return this.itemInCart(this.product);
-    },
-  },
-});
+// access cart store
+const cartStore = useCartStore();
+
+// access addItem, removeItem, and itemInCart functions from cart store
+const { addItem, removeItem, itemInCart } = cartStore;
+
+function handleAddToCart() {
+  // Call the addItem mutation from the pinia store
+  addItem(props.product);
+}
+
+function handleRemoveFromCart() {
+  // Call the removeItem mutation from the pinia store
+  removeItem(props.product);
+}
+
+// call the itemInCart function from the pinia store to check if the product is in the cart
+const isInCart = computed(() => itemInCart(props.product));
 </script>
 
 <!-- Style for the page -->

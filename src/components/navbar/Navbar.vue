@@ -1,49 +1,35 @@
 <!-- Navbar.vue is a reusable component for displaying the navigation bar of the page. It includes a hamburger menu, navigation links, and cart drawer. -->
 
-<script lang="ts">
+<script setup lang="ts">
 import { ShoppingCartIcon } from "@heroicons/vue/24/solid";
-import { defineComponent } from "vue";
 import CartDrawer from "../CartDrawer.vue";
-import Footage from "../FootageSection.vue";
 import Hamburger from "./HamburgerMenu.vue";
 import NavLinks from "./NavLinks.vue";
-import { mapGetters } from "vuex";
-export default defineComponent({
-  name: "Navbar",
-  components: {
-    // Import the components for the navigation bar
-    ShoppingCartIcon,
-    CartDrawer,
-    Footage,
-    Hamburger,
-    NavLinks,
-  },
-  data() {
-    return {
-      isMenuOpen: false as boolean, // Initialize the menu state
-      isCartOpen: false as boolean, // Initialize the cart drawer state
-    };
-  },
+import { ref } from "vue";
+import { useCartStore } from "@/store";
+import { storeToRefs } from "pinia";
 
-  methods: {
-    toggleMenu() {
-      // Method  for toggle the menu
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    closeMenu() {
-      // Method  for close the menu
-      this.isMenuOpen = false;
-    },
-    toggleCart() {
-      // Method  for toggle the cart drawer
-      this.isCartOpen = !this.isCartOpen;
-    },
-  },
-  computed: {
-    // Computed property for cart count
-    ...mapGetters("cart", ["cartCount"]),
-  },
-});
+const isMenuOpen = ref(false);
+const isCartOpen = ref(false);
+
+function toggleMenu() {
+  // Method  for toggle the menu
+  isMenuOpen.value = !isMenuOpen.value;
+}
+
+function closeMenu() {
+  // Method  for close the menu
+  isMenuOpen.value = false;
+}
+
+function toggleCart() {
+  // Method  for toggle the cart drawer
+  isCartOpen.value = !isCartOpen.value;
+}
+
+const cartStore = useCartStore();
+
+const { cartCount } = storeToRefs(cartStore);
 </script>
 
 <template>
@@ -54,7 +40,7 @@ export default defineComponent({
         <h3 class="siteHeader__title">Vue Store</h3>
       </RouterLink>
       <!-- Navigation links  component -->
-      <NavLinks :isMenuOpen="isMenuOpen" @closeHDropdown="closeMenu" />
+      <NavLinks :isMenuOpen="isMenuOpen" @closeDropdown="closeMenu" />
       <!-- Hamburger menu component -->
       <Hamburger :isMenuOpen="isMenuOpen" @closeHamburger="toggleMenu" />
       <!-- Cart drawer button -->

@@ -1,45 +1,30 @@
-import type { ActionContext } from "vuex/types/index.js";
+import { defineStore } from "pinia";
 import type { Product } from "../../types/product";
-import type { RootState } from "../index";
 import { getProduct } from "../../services/productsService";
 
-interface productDetails {
+interface ProductDetailsState {
   selectedProduct: Product | null;
   isLoading: boolean;
 }
 
-//  type productContext for selectedProduct data to use it with commit
-type productContext = ActionContext<productDetails, RootState>;
-
-//  selectedProduct module for selectedProduct data
-const selectedProduct = {
-  namespaced: true,
-  //  initial state for selectedProduct data
-  state: () => ({
+export const useSelectedProductStore = defineStore("selectedProduct", {
+  state: (): ProductDetailsState => ({
     selectedProduct: null,
     isLoading: false,
   }),
-  //  mutations for set selectedProduct data
-  mutations: {
-    setSelectedProduct(state: productDetails, product: Product) {
-      state.selectedProduct = product;
-    },
-    //  setLoading mutation for loading state
-    setLoading(state: productDetails, status: boolean) {
-      state.isLoading = status;
-    },
-  },
-  //  actions for selectedProduct data
+
   actions: {
-    //  getSelectedProduct action for fetching selectedProduct
-    async getSelectedProduct({ commit }: productContext, id: string) {
-
-      commit("setLoading", true);
-      const product = await getProduct(parseInt(id));
-      commit("setSelectedProduct", product);
-      commit("setLoading", false);
+    async getSelectedProduct(id: string) {
+      this.isLoading = true;
+      try {
+        const product = await getProduct(parseInt(id));
+        this.selectedProduct = product;
+      } catch (err) {
+        // Optionally handle or log the error
+        console.error("Failed to fetch product:", err);
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
-};
-
-export default selectedProduct;
+});

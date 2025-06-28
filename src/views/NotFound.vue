@@ -13,17 +13,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Notfound from "../assets/Notfound.svg";
-
-export default {
-  name: "NotFound",
-  data() {
-    return {
-      Notfound, // Import the Notfound image
-    };
-  },
-};
 </script>
 
 <!-- Style for the page -->

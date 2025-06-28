@@ -1,11 +1,7 @@
 <!-- FootageSection.vue is a reusable component for displaying the footer section of the page. -->
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "FootageSection",
-});
+<script setup lang="ts">
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
@@ -20,10 +16,18 @@ export default defineComponent({
           <div class="column">
             <h4>Navigate</h4>
             <ul>
-              <li>About Us</li>
-              <li>Blog</li>
-              <li>Contact Us</li>
-              <li>Sitemap</li>
+              <li>
+                <RouterLink to="/">Home</RouterLink>
+              </li>
+              <li>
+                <RouterLink to="/products">Products</RouterLink>
+              </li>
+              <li>
+                <RouterLink to="/contactUs">Contact Us</RouterLink>
+              </li>
+              <li>
+                <RouterLink to="/sitemap">Sitemap</RouterLink>
+              </li>
             </ul>
           </div>
 

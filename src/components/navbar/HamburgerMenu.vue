@@ -1,22 +1,16 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+const props = defineProps<{
+  isMenuOpen: boolean;
+}>();
 
-export default defineComponent({
-  name: "HamburgerMenu",
-  props: {
-    isMenuOpen: {
-      // Prop for the hamburger menu state
-      type: Boolean,
-      required: true,
-    },
-  },
-  methods: {
-    handleClose() {
-      // Method emit from the component to parent for close the hamburger menu
-      this.$emit("closeHamburger");
-    },
-  },
-});
+const emit = defineEmits<{
+  (e: "closeHamburger"): void;
+}>();
+
+function handleClose() {
+  // Method emit from the component to parent for close the hamburger menu
+  emit("closeHamburger");
+}
 </script>
 
 <template>

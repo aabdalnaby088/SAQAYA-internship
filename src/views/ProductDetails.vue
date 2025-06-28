@@ -45,62 +45,56 @@
   <LoadingSpinner v-show="isLoading" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { onMounted, computed, watch } from "vue";
+import { storeToRefs } from "pinia";
 import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
-import { mapActions, mapGetters, mapState } from "vuex";
-export default defineComponent({
-  name: "ProductDetails",
-  components: {
-    LoadingSpinner,
-  },
-  props: {
-    id: {
-      // Prop for the product ID
-      type: String,
-      required: true,
-    },
-  },
-  // Fetch the product data when the component is created
-  created() {
-    this.getSelectedProduct(this.id);
-  },
-  methods: {
-    // Call the addItem mutation from the vuex store cart slice
-    ...mapActions("cart", ["addItem", "removeItem"]),
-    // Call the getSelectedProduct action from the vuex store selectedProduct slice
-    ...mapActions("selectedProduct", ["getSelectedProduct"]),
+import { useCartStore, useSelectedProductStore } from "../store";
 
-    handleAddToCart() {
-      // Call the addItem mutation from the vuex store
-      this.addItem(this.selectedProduct);
-    },
+// Props
+const props = defineProps<{
+  id: string;
+}>();
 
-    handleRemoveFromCart() {
-      // Call the removeItem mutation from the vuex store
-      this.removeItem(this.selectedProduct);
-    },
-  },
-  computed: {
-    // Computed property for cart count from vuex cart slice
-    ...mapGetters("cart", ["itemInCart"]),
-    // Computed property for selectedProduct from vuex selectedProduct slice
-    ...mapState("selectedProduct", ["selectedProduct", "isLoading"]),
+// Stores
+const selectedProductStore = useSelectedProductStore();
+const cartStore = useCartStore();
 
-    isInCart() {
-      return this.itemInCart(this.selectedProduct);
-    },
-  },
+// Destructure refs from store
+const { selectedProduct, isLoading } = storeToRefs(selectedProductStore);
+const { getSelectedProduct } = selectedProductStore;
+const { addItem, removeItem, itemInCart } = cartStore;
 
-  // Watch for changes in the selectedProduct property and update the document title
-  watch: {
-    selectedProduct(newProduct) {
-      if (newProduct?.title) {
-        document.title = `${newProduct.title} | Vue Store`;
-      }
-    },
-  },
+// Fetch product on mount
+onMounted(() => {
+  getSelectedProduct(props.id);
 });
+
+// Watch for title updates
+watch(selectedProduct, (newProduct) => {
+  if (newProduct?.title) {
+    document.title = `${newProduct.title} | Vue Store`;
+  }
+});
+
+// Add to cart
+function handleAddToCart() {
+  if (selectedProduct.value) {
+    addItem(selectedProduct.value);
+  }
+}
+
+// Remove from cart
+function handleRemoveFromCart() {
+  if (selectedProduct.value) {
+    removeItem(selectedProduct.value);
+  }
+}
+
+// Computed to check if the product is already in cart
+const isInCart = computed(() =>
+  selectedProduct.value ? itemInCart(selectedProduct.value) : false,
+);
 </script>
 
 <!-- Style for the page -->

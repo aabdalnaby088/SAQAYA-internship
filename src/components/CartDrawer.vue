@@ -1,9 +1,6 @@
-<!-- CartDrawer.vue is a reusable component for displaying a cart drawer. It includes a close button and a title. -->
-
 <template>
-  <!-- Main content of the cart drawer -->
   <div class="cart-drawer">
-    <!-- Cart drawer backdrop -->
+    <!-- Backdrop -->
     <div
       :class="[
         'cart-drawer__backdrop',
@@ -11,29 +8,36 @@
       ]"
       @click.self="handleClose"
     >
-      <!-- Cart drawer panel the content of the cart drawer -->
+      <!-- Sliding panel -->
       <div
         :class="['cart-drawer__panel', { 'cart-drawer__panel--open': isOpen }]"
       >
-        <!-- Cart drawer close button -->
+        <!-- Close button -->
         <button class="cart-drawer__close-btn" @click="handleClose">
           <XMarkIcon />
         </button>
+
         <h2>Your Cart</h2>
         <hr />
+        <!-- display cart count and is empty if no items -->
         <p v-if="cartCount === 0">Your cart is empty</p>
         <p v-else>
+          <!-- display cart count -->
           Your cart contains {{ cartCount }} items for a total of ${{
             cartTotal.toFixed(2)
           }}
         </p>
+
         <div>
-          <CartItem v-for="item in items" :item="item" />
+          <!-- display cart items -->
+          <CartItem v-for="item in items" :key="item.product.id" :item="item" />
         </div>
+
+        <!-- display clear cart button if cart count is greater than 0 -->
         <button
           v-show="cartCount > 0"
           class="cart-drawer__clear-btn"
-          @click="clear"
+          @click="clearCart"
         >
           Clear Cart
         </button>
@@ -42,45 +46,31 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { XMarkIcon } from "@heroicons/vue/24/solid";
-import { defineComponent } from "vue";
-import { mapGetters, mapState, mapActions } from "vuex";
 import CartItem from "./CartItem.vue";
+import { storeToRefs } from "pinia";
+import { useCartStore } from "../store";
 
-export default defineComponent({
-  name: "CartDrawer",
-  props: {
-    isOpen: {
-      // Prop for the cart drawer state
-      type: Boolean,
-      required: true,
-    },
-  },
-  components: {
-    XMarkIcon,
-    CartItem,
-  },
-  methods: {
-    // method cleare cart from vuex cart slice
-    ...mapActions("cart", ["clearCart"]),
-    clear() {
-      this.clearCart();
-    },
-    // Methods emit from the component to parent for close the cart drawer
-    handleClose() {
-      this.$emit("close");
-    },
-  },
+// define props
+defineProps<{ isOpen: boolean }>();
+// define emits
+const emit = defineEmits<{
+  (e: "close"): void;
+}>();
 
-  computed: {
-    ...mapGetters("cart", ["cartCount", "cartTotal"]),
-    ...mapState("cart", ["items"]),
-  },
-});
+// access cart store
+const cartStore = useCartStore();
+// access cart items, cart count, and cart total from store as refs
+const { items, cartCount, cartTotal } = storeToRefs(cartStore);
+// access clear cart function
+const { clearCart } = cartStore;
+
+// handle close button click
+function handleClose() {
+  emit("close");
+}
 </script>
-
-<!-- Style for the page -->
 
 <style scoped>
 .cart-drawer {
@@ -95,13 +85,11 @@ export default defineComponent({
   transition: opacity 0.3s ease;
   z-index: 998;
 }
-
 .cart-drawer__backdrop--show {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.4);
   pointer-events: auto;
 }
-
 .cart-drawer__panel {
   position: fixed;
   top: 0;
@@ -117,7 +105,6 @@ export default defineComponent({
   padding: 1rem;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 }
-
 .cart-drawer__panel--open {
   transform: translateX(0);
 }
@@ -132,7 +119,6 @@ export default defineComponent({
   color: white;
   cursor: pointer;
 }
-
 .cart-drawer__clear-btn {
   padding: 0.5rem 1rem;
   width: 100%;
