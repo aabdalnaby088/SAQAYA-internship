@@ -1,4 +1,3 @@
-```vue
 <template>
   <!--
     ContactUs.vue displays a contact form for users to send messages.
@@ -53,27 +52,24 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "ContactPage",
-  data() {
-    return {
-      form: {
-        name: "",
-        email: "",
-        message: "",
-      },
-      submitted: false,
-    };
-  },
-  methods: {
-    submitForm() {
-      this.submitted = true;
-      this.form = { name: "", email: "", message: "" };
-      setTimeout(() => (this.submitted = false), 3000);
-    },
-  },
-};
+<script setup lang="ts">
+import { ref } from "vue";
+
+// Define form data
+const form = ref({
+  name: "",
+  email: "",
+  message: "",
+});
+
+// Define submitted state
+const submitted = ref(false);
+
+function submitForm() {
+  submitted.value = true;
+  form.value = { name: "", email: "", message: "" };
+  setTimeout(() => (submitted.value = false), 3000);
+}
 </script>
 
 <style>

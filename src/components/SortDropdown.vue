@@ -15,23 +15,27 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex";
+<script setup lang="ts">
+import { useProductsStore } from "../store";
 
-export default {
-  name: "SortDropdown",
-  data() {
-    return {
-      sort: "all",
-    };
-  },
-  methods: {
-    ...mapActions("products", ["setSort"]),
-    handleSort() {
-      this.setSort(this.sort);
-    },
-  },
-};
+import { onMounted, ref } from "vue";
+
+// define sort state for select
+const sort = ref("all");
+
+// access products store
+const productsStore = useProductsStore();
+
+//
+const { setSort } = productsStore;
+
+onMounted(() => {
+  setSort("all");
+});
+
+function handleSort() {
+  setSort(sort.value);
+}
 </script>
 
 <style scoped>

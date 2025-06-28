@@ -5,15 +5,26 @@
   <div class="productsPage">
     <div class="productsPage__header">
       <h1>Products</h1>
+      <!-- Search input component -->
+      <SearchInput />
+      <!-- Sort dropdown component -->
       <SortDropdown />
     </div>
-    <div class="productsPage__productsContainer" v-show="!loading">
+
+    <div
+      class="productsPage__productsContainer"
+      v-show="!loading && items.length > 0"
+    >
       <!-- Product card component rendered for each product -->
       <ProductCard
         v-for="product in items as Product[]"
         :key="product.id"
         :product="product"
       />
+    </div>
+    <!-- No results component if no products are found -->
+    <div v-show="!loading && items.length === 0">
+      <NoResults />
     </div>
   </div>
 
@@ -22,29 +33,18 @@
   <LoadingSpinner v-show="loading" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import ProductCard from "../components/ProductCard.vue";
 import LoadingSpinner from "../components/shared/LoadingSpinner.vue";
-import { mapState } from "vuex";
 import SortDropdown from "../components/SortDropdown.vue";
-import type { ProductsState } from "../store/modules/products";
 import type { Product } from "../types/product";
+import { useProductsStore } from "../store";
+import { storeToRefs } from "pinia";
+import SearchInput from "../components/SearchInput.vue";
+import NoResults from "../components/NoResults.vue";
 
-export default defineComponent({
-  name: "ProductList",
-  // Import the ProductCard and LoadingSpinner components
-  components: {
-    ProductCard,
-    LoadingSpinner,
-    SortDropdown,
-  },
-  // Computed properties for the products state from vuex
-  computed: {
-    ...mapState("products", ["items", "loading", "error"]),
-  },
-  // Fetch the products when the component is created
-});
+const productsStore = useProductsStore();
+const { items, loading } = storeToRefs(productsStore);
 </script>
 
 <!-- Style for the page -->
@@ -77,6 +77,8 @@ export default defineComponent({
 @media (max-width: 768px) {
   .productsPage__header {
     flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 12px;
   }
 }
 </style>

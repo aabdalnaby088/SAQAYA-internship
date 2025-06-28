@@ -1,13 +1,9 @@
-<script lang="ts">
-export default {
-  name: "HomePage",
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <!-- Main content of the page -->
   <main class="homePage">
-    This is the home page <span class="count">{{ $store.state.count }}</span>
+    This is the home page
     <br />
     our landing page goes here
     <br />

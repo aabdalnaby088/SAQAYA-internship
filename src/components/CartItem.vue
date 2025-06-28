@@ -31,42 +31,38 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
+<script setup lang="ts">
 import type { Product } from "../types/product";
-import { mapActions } from "vuex";
+import { useCartStore } from "../store";
 
-// CartItem component for displaying a cart item
-export default defineComponent({
-  name: "CartItem",
-  props: {
-    item: {
-      type: Object as PropType<{
-        // PropType for item data
-        product: Product;
-        quantity: number;
-      }>,
-      required: true,
-    },
-  },
-  // Methods for incrementing, decrementing, and removing the item from the cart slice of the vuex store
-  methods: {
-    ...mapActions("cart", [
-      "incrementQuantity",
-      "decrementQuantity",
-      "removeItem",
-    ]),
-    increment() {
-      this.incrementQuantity(this.item.product);
-    },
-    decrement() {
-      this.decrementQuantity(this.item.product);
-    },
-    remove() {
-      this.removeItem(this.item.product);
-    },
-  },
-});
+// defining props for the component
+const { item } = defineProps<{
+  item: {
+    product: Product;
+    quantity: number;
+  };
+}>();
+
+// access cart store
+const cartStore = useCartStore();
+
+// access increment, decrement, and remove item functions from cart store
+const { incrementQuantity, decrementQuantity, removeItem } = cartStore;
+
+// increment quantity
+function increment() {
+  incrementQuantity(item.product);
+}
+
+// decrement quantity
+function decrement() {
+  decrementQuantity(item.product);
+}
+
+// remove item for cart
+function remove() {
+  removeItem(item.product);
+}
 </script>
 
 <!-- Style for the page -->
@@ -93,6 +89,7 @@ export default defineComponent({
   font-size: 1rem;
   margin: 0 0 0.5rem;
   font-weight: 500;
+  text-align: left;
 }
 
 .cart-item__controls {
