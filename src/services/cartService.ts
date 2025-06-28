@@ -1,4 +1,4 @@
-import type { Product, StoredCartItem } from "../types/product";
+import type { Product, StoredCartItem,  } from "../types/product";
 
 //  getProducts function for getting cart items from local storage
 export function getCart(): StoredCartItem[] {
