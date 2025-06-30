@@ -24,7 +24,7 @@
         <p v-else>
           <!-- display cart count -->
           Your cart contains {{ cartCount }} items for a total of ${{
-            cartTotal.toFixed(2)
+            cartTotal > 0 ? cartTotal.toFixed(2) : 0
           }}
         </p>
 
