@@ -1,4 +1,4 @@
-<!-- Search input component -->
+<!-- Search input component for searching products -->
 <template>
   <div class="searchInput">
     <input

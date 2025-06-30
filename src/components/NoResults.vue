@@ -1,3 +1,4 @@
+<!-- NoResults component appears when there are no results -->
 <template>
   <div class="noResults">
     <img src="/noResults.png" alt="no results found" />

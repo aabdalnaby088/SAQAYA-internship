@@ -28,19 +28,6 @@ function handleClose() {
   // Method emit from the component to parent for close the navigation links dropdown
   emit("closeDropdown");
 }
-
-// props: {
-//   isMenuOpen: {
-//     type: Boolean,
-//     required: true,
-//   },
-// },
-// methods: {
-//   closeMenu() {
-//     // Method emit from the component to parent for close the navigation links dropdown
-//     this.$emit("closeHDropdown");
-//   },
-// },
 </script>
 
 <!-- Style for the page -->

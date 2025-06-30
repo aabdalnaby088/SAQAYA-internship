@@ -3,17 +3,20 @@ import { getCart, saveCart } from "../../services/cartService";
 import type { Product } from "../../types/product";
 import { useProductsStore } from "./products";
 
+//  CartItem interface for cart items
 export interface CartItem {
   product: Product;
   quantity: number;
 }
 
+//  CartState interface for cart state in pinia store
 interface CartState {
   items: CartItem[];
   error: string | null;
 }
 
-export const useCartStore = defineStore("cart", {
+export const useCartStore = defineStore("cart", { // setting the store name "cart"
+  //  setting the initial state of the store
   state: (): CartState => ({
     items: [],
     error: null,
