@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { getProducts } from "../../services/productsService";
 import type { Product } from "../../types/product";
 
+// interface for products state in pinia store
 interface ProductsState {
   items: Product[];
   initialItems: Product[];
@@ -9,7 +10,8 @@ interface ProductsState {
   error: string | null;
 }
 
-export const useProductsStore = defineStore("products", {
+export const useProductsStore = defineStore("products", { // setting the store name "products"
+  //  setting the initial state of the store
   state: (): ProductsState => ({
     items: [],
     initialItems: [],
@@ -17,13 +19,9 @@ export const useProductsStore = defineStore("products", {
     error: null,
   }),
 
-  getters: {
-    sortedItems(state): Product[] {
-      return state.items;
-    },
-  },
 
   actions: {
+    // function for fetching products from server
     async fetchProducts() {
       this.loading = true;
       this.error = null;
@@ -37,7 +35,7 @@ export const useProductsStore = defineStore("products", {
         this.loading = false;
       }
     },
-
+    // function for setting sort in pinia store
     setSort(sort: string) {
       switch (sort) {
         case "asc":
@@ -54,6 +52,7 @@ export const useProductsStore = defineStore("products", {
           break;
       }
     },
+    // function for setting search in pinia store
     setSearch(search: string) {
       this.items = this.initialItems.filter((product) =>
         product.title.toLowerCase().includes(search.toLowerCase()),
