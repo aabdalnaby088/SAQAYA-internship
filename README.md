@@ -1,19 +1,58 @@
-# vue-start
+🛍️ Project Overview: Vue Store
+Project Name: Vue Store
+Stack:
+- Vue 3 (Options API) Then migrated to Composition API
+- TypeScript
+- Vuex Then migrated to Pinia
+- Vite
+- CSS with BEM convention 
+Purpose:
+A simple, performant, and responsive e-commerce frontend built with Vue 3, focused on clean UI, Clean architecture and state management.
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+✅ Key Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+🛒 Product Catalog:
 
-## Type Support for `.vue` Imports in TS
+- Products fetched via store actions.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Displayed using reusable ProductCard components.
 
-## Customize configuration
+🛍️ Cart Functionality:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Add/remove products to/from the cart.
 
+- Persist cart items in localStorage (only IDs and quantity).
+
+🧮 Cart Totals:
+
+Cart count and total price computed using Vuex getters.
+
+Real-time updates shown in the navbar.
+
+⬆️ Sorting Dropdown:
+
+Allows sorting products by price, rating 
+
+🔍 Searching
+
+Allows Searching specific Product
+
+🧭 Routing:
+
+Implemented with Vue Router.
+
+Includes pages like: Home, Products, Product Details, Not Found and Contact.
+
+🧱 Layout Components:
+
+MainLayout.vue wraps all pages.
+
+Contains Navbar and Footage (footer) components.
+
+🧪 Testing 
+  Using Vitest in unit Test
+  Tests created for Vuex/Options API then migrated to Pinia/Composition API
 ## Project Setup
 
 ```sh
