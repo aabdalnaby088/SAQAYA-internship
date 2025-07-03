@@ -54,15 +54,18 @@ Contains Navbar and Footage (footer) components.
   Using Vitest in unit Test
   Tests created for Vuex/Options API then migrated to Pinia/Composition API
 
-## Folder Structure
-src/
-├── components/         # Reusable UI components
-├── views/              # Page-level components (routed)
-├── store/              # State management modules and index
-├── services/           # API logic (e.g., cartService.ts, ProductService)
-├── types/              # TypeScript interfaces
-├── router/             # Vue Router configuration
-├── Layouts/            # Main layout wrapper
+### 📁 Project Folder Structure
+
+| Folder           | Description                                      |
+|------------------|--------------------------------------------------|
+| `src/components` | Reusable UI components (e.g., `Navbar.vue`)     |
+| `src/views`      | Page-level components mapped to routes          |
+| `src/store`      | Vuex store modules and main store configuration |
+| `src/services`   | API logic and helper functions (e.g., cart, products) |
+| `src/types`      | TypeScript interfaces and type definitions      |
+| `src/router`     | Vue Router setup and route definitions          |
+| `src/Layouts`    | Main layout components used to wrap views/pages |
+
 
 ## Project Setup
 
