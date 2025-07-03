@@ -66,6 +66,8 @@ Contains Navbar and Footage (footer) components.
 | `src/router`     | Vue Router setup and route definitions          |
 | `src/Layouts`    | Main layout components used to wrap views/pages |
 
+## Project Diagram
+https://miro.com/app/board/uXjVIhwE4pE=/?share_link_id=309691097896
 
 ## Project Setup
 
